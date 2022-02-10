@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="236dp"
-        android:text="Re-type password"
+        android:text="Confirm Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.14"
@@ -116,4 +116,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="1.0" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="286dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="73dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_reg_pass2">
+
+        <RadioButton
+            android:id="@+id/rbtn_buyer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buyer" />
+
+        <RadioButton
+            android:id="@+id/rbtn_store_owner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Store Owner" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_new_reg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="16dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>
