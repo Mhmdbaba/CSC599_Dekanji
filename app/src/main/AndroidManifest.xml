@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dekanji">
         <activity
+            android:name=".StoreOwner"
+            android:exported="false" />
+        <activity
             android:name=".register"
             android:exported="false" />
         <activity
