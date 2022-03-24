@@ -19,16 +19,16 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         rd_grp = (RadioGroup) findViewById(R.id.radioGroup);
-        rd_btn = (RadioButton) findViewById(rd_grp.getCheckedRadioButtonId());
 
     }
 
     public void Button (View view){
         Button btn = (Button) view;
+        rd_btn = (RadioButton) findViewById(rd_grp.getCheckedRadioButtonId());
 
         if (btn.getTag().toString().equalsIgnoreCase("Back")){
-            Intent reg = new Intent(this,MainActivity.class);
-            startActivity(reg);
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
         }
         else if (btn.getTag().toString().equalsIgnoreCase("submit")){
             if (rd_btn.getText().toString().equalsIgnoreCase("buyer")){
@@ -38,8 +38,8 @@ public class register extends AppCompatActivity {
             }
             else if (rd_btn.getText().toString().equalsIgnoreCase("Store owner")){
                 //if store owner the app will direct th user to fill more information about his store
-                Intent reg = new Intent(this,StoreOwner.class);
-                startActivity(reg);
+                Intent intent = new Intent(this,StoreOwner.class);
+                startActivity(intent);
             }
             else{
                 Toast.makeText(this,"Choose if Buyer or Store Owner!",Toast.LENGTH_SHORT).show();
