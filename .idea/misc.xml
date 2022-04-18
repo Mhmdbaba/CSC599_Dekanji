@@ -3,29 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Dekanji/app/src/main/res/layout/activity_main.xml" value="0.21784420289855072" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Dekanji/app/src/main/res/layout/activity_register.xml" value="0.264" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/drawable/menu_back.xml" value="0.1" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/drawable/menu_back_state.xml" value="0.1" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/drawable/menu_item_padding.xml" value="0.1" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/activity_buyer.xml" value="0.15172101449275363" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/activity_homepage2.xml" value="0.264" />
+        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC498G/CurrencyConverterAPI/Dekanji/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/drawable/rounded_corner.xml" value="0.2555" />
         <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/activity_registerr.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/activity_store_owner.xml" value="0.264" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/app_bar_homepage2.xml" value="0.15172101449275363" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/content_homepage2.xml" value="0.15172101449275363" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/fragment_gallery.xml" value="0.15172101449275363" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/fragment_slideshow.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/menu.xml" value="0.1" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/nav_header.xml" value="0.1" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/layout/nav_header_homepage2.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/menu/activity_homepage2_drawer.xml" value="0.25" />
-        <entry key="..\:/Users/mhmdb/OneDrive/Desktop/CSC599/Github/CSC599_Dekanji/app/src/main/res/menu/menu.xml" value="0.1" />
       </map>
     </option>
   </component>
