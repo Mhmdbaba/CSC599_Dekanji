@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dekanji">
         <activity
+            android:name=".StoreOwner"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

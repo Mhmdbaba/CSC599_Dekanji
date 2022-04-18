@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (btn.getTag().toString().equalsIgnoreCase("register")){
             //In case the user doesn't have an account
-            //Intent intent = new Intent(this, Register.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, Register.class);
+            startActivity(intent);
         }
     }
 }
