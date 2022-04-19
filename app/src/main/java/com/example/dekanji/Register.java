@@ -57,6 +57,10 @@ public class Register extends AppCompatActivity {
                         //direct to store owner page to take extra credentials
                         //Intent intent = new Intent(this,);
                     }
+                    else {
+                        Toast.makeText(this, "Fill required Fields", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                 }
                 else {
