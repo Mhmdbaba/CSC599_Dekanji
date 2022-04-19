@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +30,14 @@
             android:layout_gravity="right|center_vertical"
             android:clickable="true"
             android:onClick="Bio"/>
-
+        
+        <Button
+            android:id="@+id/btn_my_store"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:text="My Store"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,31 +68,31 @@
                     <ImageView
                         android:layout_width="155dp"
                         android:layout_height="150dp"
-                        android:paddingRight="10dp"
+                        android:padding="20dp"
                         app:srcCompat="@drawable/pic2" />
 
                     <ImageView
                         android:layout_width="155dp"
                         android:layout_height="150dp"
-                        android:paddingRight="10dp"
+                        android:padding="20dp"
                         app:srcCompat="@drawable/pic2" />
 
                     <ImageView
                         android:layout_width="155dp"
                         android:layout_height="150dp"
-                        android:paddingRight="10dp"
+                        android:padding="20dp"
                         app:srcCompat="@drawable/pic2" />
 
                     <ImageView
                         android:layout_width="155dp"
                         android:layout_height="150dp"
-                        android:paddingRight="10dp"
+                        android:padding="20dp"
                         app:srcCompat="@drawable/pic2" />
 
                     <ImageView
                         android:layout_width="155dp"
                         android:layout_height="150dp"
-                        android:paddingRight="10dp"
+                        android:padding="20dp"
                         app:srcCompat="@drawable/pic2" />
 
                 </LinearLayout>
@@ -120,35 +128,68 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="155dp"
-                        android:layout_height="150dp"
-                        android:paddingRight="10dp"
-                        app:srcCompat="@drawable/pic1" />
+                    <androidx.gridlayout.widget.GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:columnCount="2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:rowCount="4">
 
-                    <ImageView
-                        android:layout_width="155dp"
-                        android:layout_height="150dp"
-                        android:paddingRight="10dp"
-                        app:srcCompat="@drawable/pic1" />
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
 
-                    <ImageView
-                        android:layout_width="155dp"
-                        android:layout_height="150dp"
-                        android:paddingRight="10dp"
-                        app:srcCompat="@drawable/pic1" />
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
 
-                    <ImageView
-                        android:layout_width="155dp"
-                        android:layout_height="150dp"
-                        android:paddingRight="10dp"
-                        app:srcCompat="@drawable/pic1" />
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
 
-                    <ImageView
-                        android:layout_width="155dp"
-                        android:layout_height="150dp"
-                        android:paddingRight="10dp"
-                        app:srcCompat="@drawable/pic1" />
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
+
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
+
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
+                        <ImageView
+                            android:layout_width="155dp"
+                            android:layout_height="150dp"
+                            android:padding="20dp"
+                            app:srcCompat="@drawable/pic1" />
+
+                    </androidx.gridlayout.widget.GridLayout>
 
                 </LinearLayout>
             </HorizontalScrollView>

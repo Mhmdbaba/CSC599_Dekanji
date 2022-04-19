@@ -52,6 +52,10 @@ public class Register extends AppCompatActivity {
                     //also send with the credentials
                     if(rd_btn.getText().toString().equalsIgnoreCase("buyer")){
                         //continue to home page
+                        //send that the user is buyer
+                        Intent intent = new Intent(this, HomePage.class);
+                        intent.putExtra("type","buyer");
+                        startActivity(intent);
                     }
                     else if (rd_btn.getText().toString().equalsIgnoreCase("store owner")){
                         //direct to store owner page to take extra credentials
