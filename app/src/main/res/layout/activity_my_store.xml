@@ -6,6 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".MyStore">
 
+    <ImageView
+        android:id="@+id/btn_back3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Button"
+        android:src="@drawable/back"
+        android:tag="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:onClick="Button"
+        android:tag="add"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <EditText
+        android:id="@+id/input_Price"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_corner"
+        android:ems="10"
+        android:hint="    Price"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.446" />
+
+    <EditText
+        android:id="@+id/input_category"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_corner"
+        android:ems="10"
+        android:hint="    Category"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.546" />
+
+    <EditText
+        android:id="@+id/input_product_name"
+        android:layout_width="236dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_corner"
+        android:ems="10"
+        android:hint="    Product Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.446" />
+
     <TextView
         android:id="@+id/tv_store_name"
         android:layout_width="279dp"
@@ -72,5 +145,18 @@
             </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_uploaded_image"
+        android:layout_width="123dp"
+        android:layout_height="110dp"
+        android:onClick="uploadImage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.812"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.615"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
