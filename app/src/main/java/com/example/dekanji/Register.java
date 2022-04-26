@@ -18,26 +18,22 @@ public class Register extends AppCompatActivity {
     String reg_email;
     String reg_password;
     String reg_conf_password;
-    private RadioGroup rd_grp;
-    private RadioButton rd_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        rd_grp = (RadioGroup) findViewById(R.id.radioGroup);
 
     }
 
     public void Button (View view) {
         Button btn = (Button) view;
-        rd_btn = (RadioButton) findViewById(rd_grp.getCheckedRadioButtonId());
 
         if (btn.getTag().toString().equalsIgnoreCase("back")) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, types.class);
             startActivity(intent);
         }
-        else if (btn.getTag().toString().equalsIgnoreCase("next")){
+        else if (btn.getTag().toString().equalsIgnoreCase("register")){
             reg_name = ((EditText) findViewById(R.id.input_reg_name)).getText().toString();
             reg_email = ((EditText) findViewById(R.id.input_reg_email)).getText().toString();
             reg_username = ((EditText) findViewById(R.id.input_reg_username)).getText().toString();
@@ -48,23 +44,8 @@ public class Register extends AppCompatActivity {
                     && !reg_conf_password.isEmpty()){
                 //check if passwords match
                 if (reg_password.equals(reg_conf_password)){
-                    //direct to next page based on buyer or store owner
-                    //also send with the credentials
-                    if(rd_btn.getText().toString().equalsIgnoreCase("buyer")){
-                        //continue to home page
-                        //send that the user is buyer
-                        Intent intent = new Intent(this, HomePage.class);
-                        intent.putExtra("type","buyer");
-                        startActivity(intent);
-                    }
-                    else if (rd_btn.getText().toString().equalsIgnoreCase("store owner")){
-                        //direct to store owner page to take extra credentials
-                        //Intent intent = new Intent(this,);
-                    }
-                    else {
-                        Toast.makeText(this, "Fill required Fields", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+                    //save to database
+                    //direct to home page
 
                 }
                 else {

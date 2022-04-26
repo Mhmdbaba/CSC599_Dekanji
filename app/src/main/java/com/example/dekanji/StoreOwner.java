@@ -12,7 +12,8 @@ import android.widget.Toast;
 public class StoreOwner extends AppCompatActivity {
 
     String store_name;
-    String location;
+    String longtude;
+    String latitude;
     String store_number;
     String description;
 
@@ -21,7 +22,7 @@ public class StoreOwner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_owner);
         store_name = ((EditText) findViewById(R.id.input_store_name)).getText().toString();
-        location = ((EditText) findViewById(R.id.input_location)).getText().toString();
+        //location = ((EditText) findViewById(R.id.input_location)).getText().toString();
         store_number = ((EditText) findViewById(R.id.input_number)).getText().toString();
         description = ((EditText) findViewById(R.id.input_description)).getText().toString();
     }
@@ -34,7 +35,7 @@ public class StoreOwner extends AppCompatActivity {
             startActivity(intent);
         }
         if (btn.getTag().toString().equalsIgnoreCase("submit")){
-            if(!store_name.isEmpty() && !location.isEmpty() && !store_number.isEmpty() && !description.isEmpty()){
+            if(!store_name.isEmpty() && !longtude.isEmpty() && !store_number.isEmpty() && !description.isEmpty()){
                 //save to database
                 //direct to store owner page
             }
@@ -43,6 +44,6 @@ public class StoreOwner extends AppCompatActivity {
                 return;
             }
         }
-        }
+    }
 
 }

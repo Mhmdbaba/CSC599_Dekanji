@@ -15,12 +15,5 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        btn_my_store = (Button) findViewById(R.id.btn_my_store);
-
-        Intent intent = getIntent();
-        String type = intent.getStringExtra("type");
-        if (type.equalsIgnoreCase("store owner")){
-            btn_my_store.setVisibility(View.VISIBLE);
-        }
     }
 }

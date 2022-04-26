@@ -105,45 +105,15 @@
         android:id="@+id/btn_new_reg"
         android:layout_width="160dp"
         android:layout_height="48dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="16dp"
         android:onClick="Button"
-        android:tag="next"
-        android:text="Next"
+        android:tag="register"
+        android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.3" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="291dp"
-        android:layout_height="92dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="73dp"
-        android:background="@drawable/rounded_corner"
-        android:paddingLeft="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_reg_conf_password"
-        app:layout_constraintVertical_bias="0.125">
-
-        <RadioButton
-            android:id="@+id/rbtn_buyer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Buyer" />
-
-        <RadioButton
-            android:id="@+id/rbtn_store_owner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Store Owner" />
-    </RadioGroup>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768" />
 
     <ImageView
         android:id="@+id/btn_back"

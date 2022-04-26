@@ -30,14 +30,7 @@
             android:layout_gravity="right|center_vertical"
             android:clickable="true"
             android:onClick="Bio"/>
-        
-        <Button
-            android:id="@+id/btn_my_store"
-            android:layout_width="160dp"
-            android:layout_height="48dp"
-            android:text="My Store"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+
 
         <TextView
             android:layout_width="wrap_content"
