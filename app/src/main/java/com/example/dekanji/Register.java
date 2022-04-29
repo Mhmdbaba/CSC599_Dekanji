@@ -44,6 +44,12 @@ public class Register extends AppCompatActivity {
                 //check if passwords match
                 if (reg_password.equals(reg_conf_password)){
                     //save to database
+                    ALTERUser alter = new ALTERUser();
+
+                    User user = new User (reg_name,reg_username, reg_username,reg_password);
+                    alter.add(user).addOnSuccessListener(suc-> {
+                       Toast.makeText(this, )
+                    });
                     //direct to home page
 
                 }

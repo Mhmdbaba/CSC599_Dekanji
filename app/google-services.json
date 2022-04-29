@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "814920891756",
+    "project_id": "dekanji-1cdc2",
+    "storage_bucket": "dekanji-1cdc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814920891756:android:91cdca7b769a3bb7aa8749",
+        "android_client_info": {
+          "package_name": "com.example.dekanji"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814920891756-6legj0u8ssjsos45fj9h33qd5tpep3ks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMZvxeABq5dZX_UE-lcxbWy9cHc57_fPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814920891756-6legj0u8ssjsos45fj9h33qd5tpep3ks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
