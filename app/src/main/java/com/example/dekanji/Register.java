@@ -47,9 +47,7 @@ public class Register extends AppCompatActivity {
                     ALTERUser alter = new ALTERUser();
 
                     User user = new User (reg_name,reg_username, reg_username,reg_password);
-                    alter.add(user).addOnSuccessListener(suc-> {
-                       Toast.makeText(this, )
-                    });
+                    alter.add(user);
                     //direct to home page
 
                 }
