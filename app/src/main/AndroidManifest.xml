@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dekanji">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,21 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dekanji">
         <activity
-            android:name=".types"
-            android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBCymFJjmgtLxY-BURXPuDRRtaTt23zsLk" />
-
-        <activity
-            android:name=".MyStore"
+            android:name=".mystore"
             android:exported="false" />
         <activity
             android:name=".HomePage"
             android:exported="false" />
         <activity
             android:name=".StoreOwner"
+            android:exported="false" />
+        <activity
+            android:name=".type"
             android:exported="false" />
         <activity
             android:name=".Register"

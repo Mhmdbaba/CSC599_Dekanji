@@ -15,10 +15,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="30dp"
             android:paddingTop="10dp"
             android:src="@drawable/user"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="center|center_vertical"
             android:clickable="true"
             android:onClick="Bio" />
 
@@ -27,7 +26,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:text="Mohammad Elbaba"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="center|center_vertical"
             android:clickable="true"
             android:onClick="Bio"/>
 

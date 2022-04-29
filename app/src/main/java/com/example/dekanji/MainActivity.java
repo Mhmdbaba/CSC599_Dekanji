@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (!input_password.isEmpty() && !input_username.isEmpty()) {
                 if (input_username.equals("admin") && input_password.equals("admin123")) {
-                    //Intent intent = new Intent(this, HomePage.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(this, mystore.class);
+                    startActivity(intent);
                 }
                 else if (input_username != "admin" && input_password != "admin123"){
                     //check if the credentials are found in the database
@@ -48,9 +49,13 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         }
-        else if (btn.getTag().toString().equalsIgnoreCase("register")){
+    }
+
+    public void textView (View view) {
+        TextView tv = (TextView) view;
+        if (tv.getTag().toString().equalsIgnoreCase("register")){
             //In case the user doesn't have an account
-            Intent intent = new Intent(this, Register.class);
+            Intent intent = new Intent(this, type.class);
             startActivity(intent);
         }
     }

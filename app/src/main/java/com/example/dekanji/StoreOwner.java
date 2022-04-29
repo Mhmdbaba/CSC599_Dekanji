@@ -10,39 +10,64 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class StoreOwner extends AppCompatActivity {
+    String reg_storeowner_name;
+    String reg_storeowner_username;
+    String reg_storeowner_email;
+    String reg_storeowner_password;
+    String reg_storeowner_conf_password;
 
-    String store_name;
-    String longtude;
-    String latitude;
-    String store_number;
-    String description;
+    String reg_storeowner_storename;
+    String reg_storeowner_location;
+    String reg_storeowner_phonenumber;
+    String reg_storeowner_description;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_owner);
-        store_name = ((EditText) findViewById(R.id.input_store_name)).getText().toString();
-        //location = ((EditText) findViewById(R.id.input_location)).getText().toString();
-        store_number = ((EditText) findViewById(R.id.input_number)).getText().toString();
-        description = ((EditText) findViewById(R.id.input_description)).getText().toString();
     }
 
-    public void Button(View view){
+    public void Button (View view) {
         Button btn = (Button) view;
 
-        if (btn.getTag().toString().equalsIgnoreCase("back")) {
-            Intent intent = new Intent(this, Register.class);
+        if (btn.getTag().toString().equalsIgnoreCase("back")){
+            Intent intent = new Intent(this, type.class);
             startActivity(intent);
         }
-        if (btn.getTag().toString().equalsIgnoreCase("submit")){
-            if(!store_name.isEmpty() && !longtude.isEmpty() && !store_number.isEmpty() && !description.isEmpty()){
-                //save to database
-                //direct to store owner page
+        if (btn.getTag().toString().equalsIgnoreCase("register store owner")){
+            //user information
+            reg_storeowner_name = ((EditText) findViewById(R.id.input_reg_storeowner_name)).getText().toString();
+            reg_storeowner_username = ((EditText) findViewById(R.id.input_storeowner_username)).getText().toString();
+            reg_storeowner_email = ((EditText) findViewById(R.id.input_storeowner_email)).getText().toString();
+            reg_storeowner_password = ((EditText) findViewById(R.id.input_reg_storeowner_password)).getText().toString();
+            reg_storeowner_conf_password = ((EditText) findViewById(R.id.input_reg_storeowner_conf_password)).getText().toString();
+
+            //store information
+            reg_storeowner_storename = ((EditText) findViewById(R.id.input_reg_storeowner_storename)).getText().toString();
+            reg_storeowner_location = ((EditText) findViewById(R.id.input_reg_storeowner_location)).getText().toString();
+            reg_storeowner_phonenumber = ((EditText) findViewById(R.id.input_reg_storeowner_phonenumber)).getText().toString();
+            reg_storeowner_description = ((EditText) findViewById(R.id.input_reg_storeowner_description)).getText().toString();
+
+            if (!reg_storeowner_name.isEmpty() && !reg_storeowner_username.isEmpty() && !reg_storeowner_email.isEmpty()
+            && !reg_storeowner_password.isEmpty() && !reg_storeowner_conf_password.isEmpty() && !reg_storeowner_storename.isEmpty()
+            && !reg_storeowner_location.isEmpty() && !reg_storeowner_phonenumber.isEmpty() && !reg_storeowner_description.isEmpty()){
+                //check if passwords match
+                if (reg_storeowner_password.equals(reg_storeowner_conf_password)){
+                    //check if username is found in database and insert into database all credentials
+                }
+                else {
+                    Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
             else {
-                Toast.makeText(this, "Enter required Fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Enter all required Fields", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+
+
         }
     }
 

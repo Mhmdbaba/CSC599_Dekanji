@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class Register extends AppCompatActivity {
+
 
     String reg_name;
     String reg_username;
@@ -30,7 +29,7 @@ public class Register extends AppCompatActivity {
         Button btn = (Button) view;
 
         if (btn.getTag().toString().equalsIgnoreCase("back")) {
-            Intent intent = new Intent(this, types.class);
+            Intent intent = new Intent(this, type.class);
             startActivity(intent);
         }
         else if (btn.getTag().toString().equalsIgnoreCase("register")){

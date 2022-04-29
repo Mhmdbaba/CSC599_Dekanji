@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class types extends AppCompatActivity {
+public class type extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_types);
+        setContentView(R.layout.activity_type);
     }
 
     public void Button (View view){
@@ -23,7 +23,7 @@ public class types extends AppCompatActivity {
         }
 
         if (btn.getTag().toString().equalsIgnoreCase("user")){
-            Intent intent = new Intent(this, HomePage.class);
+            Intent intent = new Intent(this, Register.class);
             startActivity(intent);
         }
         if (btn.getTag().toString().equalsIgnoreCase("store")){
