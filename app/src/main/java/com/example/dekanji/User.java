@@ -4,6 +4,8 @@ public class User {
     private String name;
     private String email;
     private String password;
+    private int storeOwner = 0;
+
     public User() {}
     public User (String name, String email, String password){
         this.name = name;
