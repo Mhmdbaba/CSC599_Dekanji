@@ -40,22 +40,6 @@
         app:layout_constraintVertical_bias="0.182" />
 
     <EditText
-        android:id="@+id/input_reg_username"
-        android:layout_width="236dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/rounded_corner"
-        android:ems="10"
-        android:hint="    Username"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
-
-    <EditText
         android:id="@+id/input_reg_email"
         android:layout_width="236dp"
         android:layout_height="50dp"
@@ -69,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintVertical_bias="0.295" />
 
     <EditText
         android:id="@+id/input_reg_password"
@@ -85,7 +69,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+        app:layout_constraintVertical_bias="0.39" />
 
     <EditText
         android:id="@+id/input_reg_conf_password"
@@ -100,7 +84,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.625" />
+        app:layout_constraintVertical_bias="0.521" />
 
     <Button
         android:id="@+id/btn_new_reg"
@@ -114,7 +98,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768" />
+        app:layout_constraintVertical_bias="0.674" />
 
     <ImageView
         android:id="@+id/btn_back"

@@ -1,19 +1,27 @@
 package com.example.dekanji;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Register extends AppCompatActivity {
+    private FirebaseAuth mAuth;
 
 
     String reg_name;
-    String reg_username;
     String reg_email;
     String reg_password;
     String reg_conf_password;
@@ -22,6 +30,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -33,21 +43,50 @@ public class Register extends AppCompatActivity {
             startActivity(intent);
         }
         else if (btn.getTag().toString().equalsIgnoreCase("register")){
-            reg_name = ((EditText) findViewById(R.id.input_reg_name)).getText().toString();
-            reg_email = ((EditText) findViewById(R.id.input_reg_email)).getText().toString();
-            reg_username = ((EditText) findViewById(R.id.input_reg_username)).getText().toString();
-            reg_password = ((EditText) findViewById(R.id.input_reg_password)).getText().toString();
-            reg_conf_password = ((EditText) findViewById(R.id.input_reg_conf_password)).getText().toString();
+            reg_name = ((EditText) findViewById(R.id.input_reg_name)).getText().toString().trim();
+            reg_email = ((EditText) findViewById(R.id.input_reg_email)).getText().toString().trim();
+            reg_password = ((EditText) findViewById(R.id.input_reg_password)).getText().toString().trim();
+            reg_conf_password = ((EditText) findViewById(R.id.input_reg_conf_password)).getText().toString().trim();
 
-            if (!reg_name.isEmpty() && !reg_username.isEmpty() && !reg_email.isEmpty() && !reg_password.isEmpty()
+            if (!reg_name.isEmpty() && !reg_email.isEmpty() && !reg_password.isEmpty()
                     && !reg_conf_password.isEmpty()){
                 //check if passwords match
                 if (reg_password.equals(reg_conf_password)){
                     //save to database
-                    ALTERUser alter = new ALTERUser();
+                    mAuth.createUserWithEmailAndPassword(reg_email,reg_password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()){
+                                        User user = new User(reg_name,reg_email,reg_password);
 
-                    User user = new User (reg_name,reg_username, reg_username,reg_password);
-                    alter.add(user);
+                                        FirebaseDatabase.getInstance().getReference("Users")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                if (task.isSuccessful()){
+                                                    Log.i("Registration: ", "done");
+
+                                                    //redirect tp login page
+                                                    startActivity(new Intent(Register.this, MainActivity.class));
+                                                }
+                                                else {
+                                                    Toast.makeText(Register.this, "Failed to register! Please try again.", Toast.LENGTH_SHORT).show();
+                                                    return;
+                                                }
+                                            }
+                                        });
+
+                                    }
+                                    else {
+                                        Toast.makeText(Register.this, "Failed to register! Please try again.", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                }
+                            });
+
                     //direct to home page
 
                 }
