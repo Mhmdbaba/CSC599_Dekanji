@@ -72,7 +72,7 @@ public class StoreOwner extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
-                                        StoreOwnerUser storeOwnerUser = new StoreOwnerUser(reg_storeowner_name,reg_storeowner_email,reg_storeowner_password,
+                                        Users storeOwnerUser = new Users(reg_storeowner_name,reg_storeowner_email,reg_storeowner_password, 1,
                                                 reg_storeowner_storename,reg_storeowner_location,reg_storeowner_phonenumber,reg_storeowner_description);
 
                                         FirebaseDatabase.getInstance().getReference("StoreOwners")

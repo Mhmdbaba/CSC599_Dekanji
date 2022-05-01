@@ -38,16 +38,20 @@ public class Register extends AppCompatActivity {
     public void Button (View view) {
         Button btn = (Button) view;
 
+        //when the user presses the back button
         if (btn.getTag().toString().equalsIgnoreCase("back")) {
             Intent intent = new Intent(this, type.class);
             startActivity(intent);
         }
-        else if (btn.getTag().toString().equalsIgnoreCase("register")){
+        //register button (submit)
+        if (btn.getTag().toString().equalsIgnoreCase("register")){
+            //gets variables and puts them in strings
             reg_name = ((EditText) findViewById(R.id.input_reg_name)).getText().toString().trim();
             reg_email = ((EditText) findViewById(R.id.input_reg_email)).getText().toString().trim();
             reg_password = ((EditText) findViewById(R.id.input_reg_password)).getText().toString().trim();
             reg_conf_password = ((EditText) findViewById(R.id.input_reg_conf_password)).getText().toString().trim();
 
+            //checks if fields are empty
             if (!reg_name.isEmpty() && !reg_email.isEmpty() && !reg_password.isEmpty()
                     && !reg_conf_password.isEmpty()){
                 //check if passwords match
@@ -58,7 +62,7 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
-                                        User user = new User(reg_name,reg_email,reg_password);
+                                        Users user = new Users(reg_name,reg_email,reg_password,0);
 
                                         FirebaseDatabase.getInstance().getReference("Users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -72,8 +76,8 @@ public class Register extends AppCompatActivity {
                                                     //redirect tp login page
                                                     startActivity(new Intent(Register.this, MainActivity.class));
                                                 }
-                                                else {
-                                                    Toast.makeText(Register.this, "Failed to register! Please try again.", Toast.LENGTH_SHORT).show();
+                                                else { //if the email already exists
+                                                    Toast.makeText(Register.this, "Failed to register! Please try again.1", Toast.LENGTH_SHORT).show();
                                                     return;
                                                 }
                                             }
@@ -86,9 +90,6 @@ public class Register extends AppCompatActivity {
                                     }
                                 }
                             });
-
-                    //direct to home page
-
                 }
                 else {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
