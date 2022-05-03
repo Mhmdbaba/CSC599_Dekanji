@@ -84,6 +84,9 @@ public class mystore extends AppCompatActivity {
             if (!product_name.isEmpty() && !product_price.isEmpty()){
                 Products product = new Products(userID, product_name, product_price);
                 referenceProducts.push().setValue(product);
+                Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(mystore.this, mystore.class));
+
             }
 
 
