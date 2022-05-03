@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,13 +34,21 @@ public class UserProfile extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        TextView tv_welcome = (TextView) findViewById(R.id.tv_welcome_message);
-        TextView tv_email = (TextView) findViewById(R.id.tv_email_address);
-        TextView tv_name = (TextView) findViewById(R.id.tv_full_name);
-        TextView tv_store_name = (TextView) findViewById(R.id.tv_store_name);
-        TextView tv_phone_number = (TextView) findViewById(R.id.tv_phone_number);
-        TextView tv_location = (TextView) findViewById(R.id.tv_location);
-        TextView tv_description = (TextView) findViewById(R.id.tv_description);
+        //output text views
+        final TextView tv_welcome = (TextView) findViewById(R.id.tv_welcome_message);
+        final TextView tv_email = (TextView) findViewById(R.id.tv_email_address);
+        final TextView tv_name = (TextView) findViewById(R.id.tv_full_name);
+        final TextView tv_store_name = (TextView) findViewById(R.id.tv_store_name_mystore);
+        final TextView tv_phone_number = (TextView) findViewById(R.id.tv_phone_number);
+        final TextView tv_location = (TextView) findViewById(R.id.tv_location);
+        final TextView tv_description = (TextView) findViewById(R.id.tv_description);
+
+        //display text views
+        final TextView tv_store_name_disp = (TextView) findViewById(R.id.tv_store_name_disp);
+        final TextView tv_phone_number_disp = (TextView) findViewById(R.id.tv_phone_number_disp);
+        final TextView tv_location_disp = (TextView) findViewById(R.id.tv_location_disp);
+        final TextView tv_description_disp = (TextView) findViewById(R.id.tv_description_disp);
+
 
 
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -58,17 +67,29 @@ public class UserProfile extends AppCompatActivity {
                     tv_email.setText(email);
 
                     //if the user is a store owner display store information
-                    if (userProfile.getStoreOwner() != 0) {
+                    if (userProfile.getStoreOwner() == 1) {
                         String store_name = userProfile.getStoreName();
                         String location = userProfile.getLocation();
                         String description = userProfile.getDescription();
                         String phone_number = userProfile.getPhoneNumber();
+
+                        tv_store_name.setVisibility(View.VISIBLE);
+                        tv_email.setVisibility(View.VISIBLE);
+                        tv_phone_number.setVisibility(View.VISIBLE);
+                        tv_description.setVisibility(View.VISIBLE);
+                        tv_location.setVisibility(View.VISIBLE);
 
                         //display store data
                         tv_store_name.setText(store_name);
                         tv_location.setText(location);
                         tv_description.setText(description);
                         tv_phone_number.setText(phone_number);
+
+                        //display store owners text views
+                        tv_store_name_disp.setVisibility(View.VISIBLE);
+                        tv_phone_number_disp.setVisibility(View.VISIBLE);
+                        tv_location_disp.setVisibility(View.VISIBLE);
+                        tv_description_disp.setVisibility(View.VISIBLE);
 
                     }
                 }
@@ -83,10 +104,19 @@ public class UserProfile extends AppCompatActivity {
 
     }
 
-    public void LogOut (View view) {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(UserProfile.this, MainActivity.class));
+    public void Button (View view) {
+        Button btn = (Button) view;
+
+        if (btn.getTag().toString().equalsIgnoreCase("back")) {
+            Intent intent = new Intent(UserProfile.this, mystore.class);
+            startActivity(intent);
+        }
+        if (btn.getTag().toString().equalsIgnoreCase("logout")){
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(UserProfile.this, MainActivity.class));
+        }
     }
+
 
 
 

@@ -16,9 +16,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
+    int storeOwner = 0;
 
     String input_email;
     String input_password;
@@ -36,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if (btn.getTag().toString().equalsIgnoreCase("login")){
             //In case the user presses login
             //check the user credentials in database and direct the user to home page
-            input_email = ((EditText) findViewById(R.id.input_email)).getText().toString();
+            input_email = ((EditText) findViewById(R.id.input_email)).getText().toString().trim();
             input_password = ((EditText) findViewById(R.id.input_password)).getText().toString();
 
             if (!input_password.isEmpty() && !input_email.isEmpty()) {
@@ -64,8 +72,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this,HomePage.class));
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+                    String userID = user.getUid();
 
+                    reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Users userProfile = snapshot.getValue(Users.class);
+                            if (userProfile.getStoreOwner() == 1){
+                                startActivity(new Intent(MainActivity.this, mystore.class));
+                            }
+                            else {
+                                startActivity(new Intent(MainActivity.this,HomePage.class));
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(MainActivity.this, "Something went wrong! Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }else {
                     Toast.makeText(MainActivity.this, "Failed to login! Invalid credentials", Toast.LENGTH_SHORT).show();
                 }

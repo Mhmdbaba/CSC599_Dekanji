@@ -14,6 +14,8 @@ public class Users {
     private String phoneNumber;
     private String description;
 
+    public Users(){}
+
     //for user credentials
     public Users(String name, String email, String password, int storeOwner) {
         this.name = name;

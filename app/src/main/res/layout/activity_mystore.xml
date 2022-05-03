@@ -8,47 +8,46 @@
 
 
     <ImageView
-        android:id="@+id/btn_back3"
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="Button"
-        android:src="@drawable/back"
-        android:tag="Back"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:paddingTop="10dp"
+        android:src="@drawable/user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.024" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="160dp"
-        android:layout_height="48dp"
-        android:onClick="Button"
-        android:tag="add"
-        android:text="Add"
+    <TextView
+        android:id="@+id/tv_name_disp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:onClick="TextView"
+        android:tag="profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintHorizontal_bias="0.795"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.067" />
 
-    <EditText
-        android:id="@+id/input_price"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rounded_corner"
-        android:ems="10"
-        android:hint="    Price"
-        android:inputType="textPersonName"
+    <TextView
+        android:id="@+id/tv_store_name_mystore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.56" />
+        app:layout_constraintVertical_bias="0.194" />
 
     <EditText
         android:id="@+id/input_product_name"
@@ -63,20 +62,49 @@
         app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.446" />
+        app:layout_constraintVertical_bias="0.562" />
 
-    <TextView
-        android:id="@+id/tv_store_name"
-        android:layout_width="279dp"
-        android:layout_height="67dp"
-        android:text="Store Name"
-        android:textAlignment="center"
-        android:textSize="48sp"
+    <EditText
+        android:id="@+id/input_price"
+        android:layout_width="110dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_corner"
+        android:ems="10"
+        android:hint="    Price"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintVertical_bias="0.676" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:onClick="Button"
+        android:tag="add"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796" />
+
+    <ImageView
+        android:id="@+id/iv_uploaded_image"
+        android:layout_width="123dp"
+        android:layout_height="110dp"
+        android:onClick="uploadImage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.645"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -84,9 +112,10 @@
         android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22000003">
+        app:layout_constraintVertical_bias="0.356">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -131,19 +160,6 @@
             </LinearLayout>
         </HorizontalScrollView>
     </ScrollView>
-
-    <ImageView
-        android:id="@+id/iv_uploaded_image"
-        android:layout_width="123dp"
-        android:layout_height="110dp"
-        android:onClick="uploadImage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.944"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.518"
-        tools:srcCompat="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
