@@ -2,9 +2,12 @@ package com.example.dekanji;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class mystore extends AppCompatActivity {
 
     String product_name;
@@ -31,6 +36,10 @@ public class mystore extends AppCompatActivity {
     private DatabaseReference referenceProducts;
 
     private Users profileUser;
+
+    RecyclerView recyclerView;
+    MyAdapter myAdapter;
+    ArrayList<Products> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,33 @@ public class mystore extends AppCompatActivity {
             }
         });
 
+        recyclerView = findViewById(R.id.product_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        list = new ArrayList<>();
+        myAdapter = new MyAdapter(this, list);
+        recyclerView.setAdapter(myAdapter);
+
+        referenceProducts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                    Products product = dataSnapshot.getValue(Products.class);
+                    if (product.getUserID().equals(userID)){
+                        list.add(product);
+                    }
+                }
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(mystore.this,"Please try again!", Toast.LENGTH_SHORT);
+            }
+        });
     }
 
     public void TextView (View view) {
@@ -77,21 +113,19 @@ public class mystore extends AppCompatActivity {
         Button btn = (Button) view;
 
         if (btn.getTag().toString().equalsIgnoreCase("add")){
+
             //get inputs from user
             product_name = ((EditText) findViewById(R.id.input_product_name)).getText().toString();
             product_price = ((EditText) findViewById(R.id.input_price)).getText().toString();
 
             if (!product_name.isEmpty() && !product_price.isEmpty()){
+
+                //add item to database
                 Products product = new Products(userID, product_name, product_price);
                 referenceProducts.push().setValue(product);
                 Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(mystore.this, mystore.class));
-
             }
-
-
-
-            //add item to database
         }
     }
 }

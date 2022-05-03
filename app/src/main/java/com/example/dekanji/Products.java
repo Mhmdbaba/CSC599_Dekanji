@@ -1,15 +1,16 @@
 package com.example.dekanji;
 
 public class Products {
-    private String userID;
-    private String productName;
-    private String price;
+    private String userID, productName, price, email;
+
+    public Products() { }
 
     public Products(String userID, String productName, String price) {
         this.userID = userID;
         this.productName = productName;
         this.price = price;
     }
+
 
     public String getUserID() {
         return userID;
