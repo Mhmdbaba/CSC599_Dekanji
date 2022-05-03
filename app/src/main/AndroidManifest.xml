@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dekanji">
         <activity
+            android:name=".UserProfile"
+            android:exported="false"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/Theme.Dekanji.NoActionBar" />
+        <activity
             android:name=".mystore"
             android:exported="false" />
         <activity
