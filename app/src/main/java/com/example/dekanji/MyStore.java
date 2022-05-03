@@ -105,7 +105,10 @@ public class mystore extends AppCompatActivity {
         TextView tv = (TextView) view;
 
         if (tv.getTag().toString().equalsIgnoreCase("profile")){
-            startActivity(new Intent(mystore.this, UserProfile.class));
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
         }
     }
 
