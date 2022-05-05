@@ -1,18 +1,18 @@
-<center>
-Lebanese American University
+<p align="center">
+#Lebanese American University
 <br>
 <br>
 <br>
-Department of Computer Science and Mathematics
+#Department of Computer Science and Mathematics
 <br>
 <br>
 <br>
-CSC599 Capstone Project: Dekanji
+#CSC599 Capstone Project: Dekanji
 <br>
 <br>
 <br>
 <b> Dekanji: Online delivery service for small businesses </b>
-</center>
+</p>
 
 
 ### Overview
