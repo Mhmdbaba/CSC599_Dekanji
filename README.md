@@ -1,5 +1,4 @@
 <p align="center">
-<h1>
 Lebanese American University
 <br>
 <br>
@@ -21,13 +20,12 @@ Instructor: Dr. Faisal Abu Khzam
 <br>
 <br>
 Mohammad Elbaba
-</h1?
 </p>
 
 
 ### Abstract
 
-#####Introduction
+<h5>Introduction</h5>
 In our world, there is unfairness in the concept of development. Many people work on themselves to improve, while others depend on luck. Sometimes, luck is the winning team leaving all people working hard broken and back to the start. Developing an idea to help those people in upgrading their workplace is our goal. The idea is to create an application to allow local stores to put their home-made products online to let people find them and order to their home. The following paper presents the idea of "Dekanji" which is an application that allows the user to sign up as a buyer or store owner, sign in, and display his products. This application will be a great benefit for local store owners to display their products for people to allow them to purchase them. As we know, Lebanon is living a crisis affecting all stores and closure of small business. This application shall help the owners of the small businesses by providing them with a free application to help them in surviving this pandemic.
 
 ### Features
