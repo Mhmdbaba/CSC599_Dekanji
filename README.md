@@ -12,7 +12,7 @@ CSC599 Capstone Project: Dekanji
 <br>
 <br>
 <b> Dekanji: Online delivery service for small businesses </b>
-<center>
+</center>
 
 
 ### Overview
