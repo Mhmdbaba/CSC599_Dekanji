@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class mystore extends AppCompatActivity {
 
@@ -44,7 +45,12 @@ public class mystore extends AppCompatActivity {
     MyAdapter myAdapter;
     ArrayList<Products> list;
 
-    boolean isLoading = false;
+    EditText editText_productName;
+    EditText editText_productPrice;
+    Button btn_add;
+    Products product_edit;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +98,8 @@ public class mystore extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     Products product = dataSnapshot.getValue(Products.class);
-                    if (product.getUserID().equals(userID)){
+                    if (product.getUserID().equals(userID) && product.getRemoved() != 1){
+                        product.setProductID(dataSnapshot.getKey());
                         list.add(product);
                     }
                 }
@@ -104,6 +111,24 @@ public class mystore extends AppCompatActivity {
                 Toast.makeText(mystore.this,"Please try again!", Toast.LENGTH_SHORT);
             }
         });
+
+
+        btn_add = (Button) findViewById(R.id.btn_add);
+        editText_productName = (EditText) findViewById(R.id.input_product_name);
+        editText_productPrice = (EditText) findViewById(R.id.input_price);
+
+        product_edit = (Products) getIntent().getSerializableExtra("EDIT");
+        if (product_edit != null){
+            editText_productPrice.setText(product_edit.getPrice());
+            editText_productName.setText(product_edit.getProductName());
+            recyclerView.setVisibility(View.INVISIBLE);
+            btn_add.setText("Update");
+
+        } else {
+            btn_add.setText("ADD");
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public void TextView (View view) {
@@ -117,7 +142,7 @@ public class mystore extends AppCompatActivity {
     public void Button(View view){
         Button btn = (Button) view;
 
-        if (btn.getTag().toString().equalsIgnoreCase("add")){
+        if (btn.getTag().toString().equalsIgnoreCase("add") && product_edit == null){
 
             //get inputs from user
             product_name = ((EditText) findViewById(R.id.input_product_name)).getText().toString();
@@ -131,6 +156,21 @@ public class mystore extends AppCompatActivity {
                 Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(mystore.this, mystore.class));
             }
+        } else if (btn.getTag().toString().equalsIgnoreCase("add") && product_edit != null){
+            referenceProducts.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Products prod = snapshot.getValue(Products.class);
+                    product_edit.setProductName(editText_productName.getText().toString());
+                    product_edit.setPrice((editText_productPrice.getText().toString()));
+                    finish();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(mystore.this, "Error! Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }

@@ -1,7 +1,30 @@
 package com.example.dekanji;
 
 public class Products {
-    private String userID, productName, price, email;
+
+    private String productID;
+    private String userID;
+    private String productName;
+    private String price;
+    private String email;
+    private int removed = 0;
+
+    public int getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(int removed) {
+        this.removed = removed;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
 
     public Products() { }
 
@@ -9,6 +32,8 @@ public class Products {
         this.userID = userID;
         this.productName = productName;
         this.price = price;
+        this.productID = String.valueOf(Globals.globalProductID);
+        Globals.globalProductID++;
     }
 
 
