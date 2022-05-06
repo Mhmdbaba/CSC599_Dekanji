@@ -81,9 +81,11 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Users userProfile = snapshot.getValue(Users.class);
                             if (userProfile.getStoreOwner() == 1){
+                                finish();
                                 startActivity(new Intent(MainActivity.this, mystoree.class));
                             }
                             else {
+                                finish();
                                 startActivity(new Intent(MainActivity.this,HomePage.class));
                             }
                         }

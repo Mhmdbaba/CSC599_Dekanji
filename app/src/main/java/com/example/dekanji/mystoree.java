@@ -105,9 +105,7 @@ public class mystoree extends AppCompatActivity {
 
         if (tv.getTag().toString().equalsIgnoreCase("profile")){
             finish();
-            overridePendingTransition( 0, 0);
-            startActivity(getIntent());
-            overridePendingTransition( 0, 0);
+            startActivity(new Intent(mystoree.this, UserProfile.class));
         }
     }
 
