@@ -108,7 +108,7 @@ public class UserProfile extends AppCompatActivity {
         Button btn = (Button) view;
 
         if (btn.getTag().toString().equalsIgnoreCase("back")) {
-            Intent intent = new Intent(UserProfile.this, mystore.class);
+            Intent intent = new Intent(UserProfile.this, mystoree.class);
             startActivity(intent);
         }
         if (btn.getTag().toString().equalsIgnoreCase("logout")){

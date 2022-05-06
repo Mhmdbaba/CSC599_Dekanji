@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (!input_password.isEmpty() && !input_email.isEmpty()) {
                 if (input_email.equals("admin") && input_password.equals("admin123")) {
-                    Intent intent = new Intent(this, mystore.class);
+                    Intent intent = new Intent(this, mystoree.class);
                     startActivity(intent);
                 }
                 else if (input_email != "admin" && input_password != "admin123"){
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Users userProfile = snapshot.getValue(Users.class);
                             if (userProfile.getStoreOwner() == 1){
-                                startActivity(new Intent(MainActivity.this, mystore.class));
+                                startActivity(new Intent(MainActivity.this, mystoree.class));
                             }
                             else {
                                 startActivity(new Intent(MainActivity.this,HomePage.class));

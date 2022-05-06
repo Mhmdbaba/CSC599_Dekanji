@@ -2,50 +2,51 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp">
-
-    <TextView
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:text="&#8942;"
-        android:textSize="20sp"
-        android:id="@+id/txt_option"
-        android:layout_gravity="right"
-        android:textAlignment="center"/>
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="16dp">
+    
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/user"
-            android:padding="5dp"
-            android:id="@+id/img_product"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
 
             <TextView
                 android:id="@+id/tv_product_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Name"
-                android:textSize="20sp"
-                android:layout_marginBottom="5dp"
-                android:textColor="@color/black"/>
+                android:layout_marginLeft="8dp"
+                android:text="*Product Name*"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+
             <TextView
                 android:id="@+id/tv_product_price"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Product Price"
-                android:textSize="20sp"
-                android:layout_marginBottom="5dp"
-                android:textColor="@color/black"/>
+                android:layout_marginLeft="8dp"
+                android:text="*Product Price*"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
 
 
         </LinearLayout>

@@ -4,15 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class mystore extends AppCompatActivity {
+public class mystoree extends AppCompatActivity {
 
     String product_name;
     String product_price;
@@ -40,22 +36,14 @@ public class mystore extends AppCompatActivity {
 
     private Users profileUser;
 
-    SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     MyAdapter myAdapter;
     ArrayList<Products> list;
 
-    EditText editText_productName;
-    EditText editText_productPrice;
-    Button btn_add;
-    Products product_edit;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mystore);
+        setContentView(R.layout.activity_mystoree);
 
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -79,7 +67,7 @@ public class mystore extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(mystore.this,"Please try again!", Toast.LENGTH_SHORT);
+                Toast.makeText(mystoree.this,"Please try again!", Toast.LENGTH_SHORT);
             }
         });
 
@@ -98,8 +86,7 @@ public class mystore extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     Products product = dataSnapshot.getValue(Products.class);
-                    if (product.getUserID().equals(userID) && product.getRemoved() != 1){
-                        product.setProductID(dataSnapshot.getKey());
+                    if (product.getUserID().equals(userID)){
                         list.add(product);
                     }
                 }
@@ -108,41 +95,26 @@ public class mystore extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(mystore.this,"Please try again!", Toast.LENGTH_SHORT);
+                Toast.makeText(mystoree.this,"Please try again!", Toast.LENGTH_SHORT);
             }
         });
-
-
-        btn_add = (Button) findViewById(R.id.btn_add);
-        editText_productName = (EditText) findViewById(R.id.input_product_name);
-        editText_productPrice = (EditText) findViewById(R.id.input_price);
-
-        product_edit = (Products) getIntent().getSerializableExtra("EDIT");
-        if (product_edit != null){
-            editText_productPrice.setText(product_edit.getPrice());
-            editText_productName.setText(product_edit.getProductName());
-            recyclerView.setVisibility(View.INVISIBLE);
-            btn_add.setText("Update");
-
-        } else {
-            btn_add.setText("ADD");
-            recyclerView.setVisibility(View.VISIBLE);
-        }
-
     }
 
     public void TextView (View view) {
         TextView tv = (TextView) view;
 
         if (tv.getTag().toString().equalsIgnoreCase("profile")){
-            startActivity(new Intent(mystore.this, UserProfile.class));
+            finish();
+            overridePendingTransition( 0, 0);
+            startActivity(getIntent());
+            overridePendingTransition( 0, 0);
         }
     }
 
     public void Button(View view){
         Button btn = (Button) view;
 
-        if (btn.getTag().toString().equalsIgnoreCase("add") && product_edit == null){
+        if (btn.getTag().toString().equalsIgnoreCase("add")){
 
             //get inputs from user
             product_name = ((EditText) findViewById(R.id.input_product_name)).getText().toString();
@@ -154,23 +126,8 @@ public class mystore extends AppCompatActivity {
                 Products product = new Products(userID, product_name, product_price);
                 referenceProducts.push().setValue(product);
                 Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(mystore.this, mystore.class));
+                startActivity(new Intent(mystoree.this, mystoree.class));
             }
-        } else if (btn.getTag().toString().equalsIgnoreCase("add") && product_edit != null){
-            referenceProducts.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Products prod = snapshot.getValue(Products.class);
-                    product_edit.setProductName(editText_productName.getText().toString());
-                    product_edit.setPrice((editText_productPrice.getText().toString()));
-                    finish();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(mystore.this, "Error! Please try again.", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 }

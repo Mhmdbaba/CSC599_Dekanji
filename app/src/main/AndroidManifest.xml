@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dekanji">
         <activity
+            android:name=".mystoree"
+            android:exported="false" />
+        <activity
             android:name=".UserProfile"
             android:exported="false"
             android:label="@string/title_activity_user_profile"
