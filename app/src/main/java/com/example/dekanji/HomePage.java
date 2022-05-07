@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends AppCompatActivity implements MyAdapterHP.OnNoteListener {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
@@ -65,7 +65,7 @@ public class HomePage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapterHP = new MyAdapterHP(this, list);
+        myAdapterHP = new MyAdapterHP(this, list, this);
         recyclerView.setAdapter(myAdapterHP);
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -98,5 +98,13 @@ public class HomePage extends AppCompatActivity {
             finish();
             startActivity(new Intent(HomePage.this,UserProfile.class));
         }
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        Users u = list.get(position);
+        Intent intent = new Intent(this, Test.class);
+        intent.putExtra("EDIT",u);
+        startActivity(intent);
     }
 }

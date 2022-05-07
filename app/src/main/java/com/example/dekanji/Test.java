@@ -12,7 +12,7 @@ public class Test extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        int prod = getIntent().getIntExtra("EDIT", 0);
-        Toast.makeText(this, String.valueOf(prod), Toast.LENGTH_SHORT).show();
+        Users prod = (Users) getIntent().getSerializableExtra("EDIT");
+        Toast.makeText(this, prod.getStoreName(), Toast.LENGTH_SHORT).show();
     }
 }

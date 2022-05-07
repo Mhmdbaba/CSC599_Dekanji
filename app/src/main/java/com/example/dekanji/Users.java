@@ -1,6 +1,8 @@
 package com.example.dekanji;
 
-public class Users {
+import java.io.Serializable;
+
+public class Users implements Serializable {
 
     //user credentials
     private String name;
