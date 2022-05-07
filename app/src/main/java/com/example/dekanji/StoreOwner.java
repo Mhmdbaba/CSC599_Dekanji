@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,13 +42,19 @@ public class StoreOwner extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+    public void ImgButton (View view) {
+        ImageView iv = (ImageView) view;
+
+        //when the user presses the back button
+        if (iv.getTag().toString().equalsIgnoreCase("back")){
+            finish();
+            startActivity(new Intent(StoreOwner.this, type.class));
+        }
+    }
+
     public void Button (View view) {
         Button btn = (Button) view;
 
-        if (btn.getTag().toString().equalsIgnoreCase("back")){
-            Intent intent = new Intent(this, type.class);
-            startActivity(intent);
-        }
         if (btn.getTag().toString().equalsIgnoreCase("register store owner")){
             //user information
             reg_storeowner_name = ((EditText) findViewById(R.id.input_reg_storeowner_name)).getText().toString();
@@ -84,6 +91,7 @@ public class StoreOwner extends AppCompatActivity {
                                                     Log.i("Registration: ", "done");
 
                                                     //redirect tp login page
+                                                    finish();
                                                     startActivity(new Intent(StoreOwner.this, MainActivity.class));
                                                 }
                                                 else {

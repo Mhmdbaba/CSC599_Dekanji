@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (!input_password.isEmpty() && !input_email.isEmpty()) {
                 if (input_email.equals("admin") && input_password.equals("admin123")) {
+                    finish();
                     Intent intent = new Intent(this, mystoree.class);
                     startActivity(intent);
                 }

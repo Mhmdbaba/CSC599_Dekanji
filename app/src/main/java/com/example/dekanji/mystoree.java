@@ -124,6 +124,7 @@ public class mystoree extends AppCompatActivity {
                 Products product = new Products(userID, product_name, product_price);
                 referenceProducts.push().setValue(product);
                 Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+                finish();
                 startActivity(new Intent(mystoree.this, mystoree.class));
             }
         }

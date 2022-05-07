@@ -56,6 +56,7 @@ public class HomePage extends AppCompatActivity {
         TextView tv = (TextView) view;
 
         if (tv.getTag().toString().equalsIgnoreCase("profile")){
+            finish();
             startActivity(new Intent(HomePage.this,UserProfile.class));
         }
     }

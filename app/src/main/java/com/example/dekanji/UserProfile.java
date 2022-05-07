@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class UserProfile extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
+    Users userProfile;
 
 
 
@@ -54,7 +57,7 @@ public class UserProfile extends AppCompatActivity {
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Users userProfile = snapshot.getValue(Users.class);
+                userProfile = snapshot.getValue(Users.class);
 
                 if (userProfile != null) {
                     String full_name = userProfile.getName();
@@ -104,13 +107,23 @@ public class UserProfile extends AppCompatActivity {
 
     }
 
+    public void ImgButton (View view) {
+        ImageView iv = (ImageView) view;
+
+        if (iv.getTag().toString().equalsIgnoreCase("back")){
+            finish();
+            if (userProfile.getStoreOwner() == 1) {
+                startActivity(new Intent(UserProfile.this, mystoree.class));
+            }
+            else {
+                startActivity(new Intent(UserProfile.this, HomePage.class));
+            }
+        }
+    }
+
     public void Button (View view) {
         Button btn = (Button) view;
 
-        if (btn.getTag().toString().equalsIgnoreCase("back")) {
-            Intent intent = new Intent(UserProfile.this, mystoree.class);
-            startActivity(intent);
-        }
         if (btn.getTag().toString().equalsIgnoreCase("logout")){
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(UserProfile.this, MainActivity.class));

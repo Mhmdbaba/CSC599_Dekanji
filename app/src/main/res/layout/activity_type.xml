@@ -11,7 +11,7 @@
         android:id="@+id/btn_back4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="Button"
+        android:onClick="ImgButton"
         android:src="@drawable/back"
         android:tag="Back"
         app:layout_constraintBottom_toBottomOf="parent"

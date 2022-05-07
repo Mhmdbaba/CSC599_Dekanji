@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,14 +36,19 @@ public class Register extends AppCompatActivity {
 
     }
 
+    public void ImgButton (View view) {
+        ImageView iv = (ImageView) view;
+
+        //when the user presses the back button
+        if (iv.getTag().toString().equalsIgnoreCase("back")){
+            finish();
+            startActivity(new Intent(Register.this, type.class));
+        }
+    }
+
     public void Button (View view) {
         Button btn = (Button) view;
 
-        //when the user presses the back button
-        if (btn.getTag().toString().equalsIgnoreCase("back")) {
-            Intent intent = new Intent(this, type.class);
-            startActivity(intent);
-        }
         //register button (submit)
         if (btn.getTag().toString().equalsIgnoreCase("register")){
             //gets variables and puts them in strings
@@ -74,6 +80,7 @@ public class Register extends AppCompatActivity {
                                                     Log.i("Registration: ", "done");
 
                                                     //redirect tp login page
+                                                    finish();
                                                     startActivity(new Intent(Register.this, MainActivity.class));
                                                 }
                                                 else { //if the email already exists

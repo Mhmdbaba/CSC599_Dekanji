@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class type extends AppCompatActivity {
 
@@ -17,10 +18,6 @@ public class type extends AppCompatActivity {
 
     public void Button (View view){
         Button btn = (Button) view;
-        if (btn.getTag().toString().equalsIgnoreCase("back")) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
 
         if (btn.getTag().toString().equalsIgnoreCase("user")){
             Intent intent = new Intent(this, Register.class);
@@ -31,5 +28,13 @@ public class type extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+    public void ImgButton (View view) {
+        ImageView iv = (ImageView) view;
+
+        if (iv.getTag().toString().equalsIgnoreCase("back")){
+            finish();
+            startActivity(new Intent(type.this, MainActivity.class));
+        }
     }
 }

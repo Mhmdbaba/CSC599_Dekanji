@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mystore">
+    tools:context=".mystoree">
 
 
     <ImageView
@@ -30,6 +30,7 @@
         android:clickable="true"
         android:onClick="TextView"
         android:tag="profile"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.795"
