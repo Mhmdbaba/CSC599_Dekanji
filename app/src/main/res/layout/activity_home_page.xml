@@ -31,12 +31,16 @@
             android:tag="profile"/>
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:text="Featured Items"
             android:textSize="20dp" />
+
+
         <ScrollView
+            android:visibility="gone"
             android:id="@+id/scrollView1"
             android:layout_width="413dp"
             android:layout_height="150dp"
@@ -96,95 +100,108 @@
             android:text="Stores Available"
             android:textSize="20dp"
             android:paddingLeft="5dp"/>
-
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/store_list"
+            android:layout_width="406dp"
+            android:layout_height="314dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.992" />
 
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="SpeakableTextPresentCheck">
 
-                <LinearLayout
-                    android:layout_width="300dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
 
-                    <androidx.gridlayout.widget.GridLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:columnCount="2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:rowCount="4">
 
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
+<!--        <ScrollView-->
+<!--            android:id="@+id/scrollView2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="400dp"-->
+<!--            android:paddingLeft="30dp"-->
+<!--            android:paddingRight="30dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView7"-->
+<!--            app:layout_constraintVertical_bias="0.0">-->
 
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
+<!--            <HorizontalScrollView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                tools:ignore="SpeakableTextPresentCheck">-->
 
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
+<!--                <LinearLayout-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical">-->
 
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
+<!--                    <androidx.gridlayout.widget.GridLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        app:columnCount="2"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:rowCount="4">-->
 
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
 
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
-                        <ImageView
-                            android:layout_width="155dp"
-                            android:layout_height="150dp"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/pic1" />
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
 
-                    </androidx.gridlayout.widget.GridLayout>
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
 
-                </LinearLayout>
-            </HorizontalScrollView>
-        </ScrollView>
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
+<!--                        <ImageView-->
+<!--                            android:layout_width="155dp"-->
+<!--                            android:layout_height="150dp"-->
+<!--                            android:padding="20dp"-->
+<!--                            app:srcCompat="@drawable/pic1" />-->
+
+<!--                    </androidx.gridlayout.widget.GridLayout>-->
+
+<!--                </LinearLayout>-->
+<!--            </HorizontalScrollView>-->
+<!--        </ScrollView>-->
 
 
 

@@ -1,8 +1,10 @@
 package com.example.dekanji;
 
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class Products implements Serializable {
+public class Products  {
     private String userID, productName, price;
     private int productID, active;
 

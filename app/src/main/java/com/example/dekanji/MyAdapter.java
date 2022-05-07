@@ -2,7 +2,6 @@ package com.example.dekanji;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -21,11 +22,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context context;
     ArrayList<Products> list;
 
+    Products products;
 
-    public MyAdapter(Context context, ArrayList<Products> list) {
+    DatabaseReference referenceProducts = FirebaseDatabase.getInstance().getReference("Products");
+
+
+    protected MyAdapter(Context context, ArrayList<Products> list) {
         this.context = context;
         this.list = list;
     }
+
 
     @NonNull
     @Override
@@ -37,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        Products products = list.get(position);
+        products = list.get(position);
         holder.product_name.setText(products.getProductName());
         holder.price.setText(products.getPrice());
         holder.txt_options.setOnClickListener(v->
@@ -51,12 +57,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                     case R.id.menu_edit:
                         Toast.makeText(context, "edit", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(context, mystoree.class);
-                        intent.putExtra("EDIT", products);
+                        intent.putExtra("EDIT", products.getProductID());
                         context.startActivity(intent);
-
                         break;
                     case R.id.menu_remove:
-                        Toast.makeText(context, "remove", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "remove", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, products.getProductName(), Toast.LENGTH_SHORT).show();
 
                         break;
                 }

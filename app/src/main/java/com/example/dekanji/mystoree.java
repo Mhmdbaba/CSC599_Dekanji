@@ -22,7 +22,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class mystoree extends AppCompatActivity {
 
@@ -69,10 +68,32 @@ public class mystoree extends AppCompatActivity {
         input_price = (EditText) findViewById(R.id.input_price);
         btn_add_prod = (Button) findViewById(R.id.btn_add_product);
 
-        if (getIntent() != null && getIntent().getExtras() != null && getIntent().hasExtra("EDIT")){
-            prod = (Products) getIntent().getSerializableExtra("EDIT");
-            Toast.makeText(this, prod.getProductID(), Toast.LENGTH_SHORT).show();
+
+        if (getIntent() != null && getIntent().getIntExtra("EDIT", 0) != 0){
+            int edit_prodID = getIntent().getIntExtra("EDIT", 0);
+//            referenceProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                                prod = dataSnapshot.getValue(Products.class);
+//                                if (prod.getProductID() == (edit_prodID)){
+//                                    break;
+//                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+
+            Toast.makeText(this, String.valueOf(edit_prodID), Toast.LENGTH_SHORT).show();
         }
+
+//        prod = (Products) getIntent().getParcelableExtra("EDIT");
+//        Toast.makeText(this, prod.getProductID(), Toast.LENGTH_SHORT).show();
+
 
 //
 //        if (prod == null) {

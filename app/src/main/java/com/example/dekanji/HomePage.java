@@ -2,10 +2,11 @@ package com.example.dekanji;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +19,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class HomePage extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
 
     Users profileUser;
+
+    RecyclerView recyclerView;
+    MyAdapterHP myAdapterHP;
+    private ArrayList<Users> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,37 @@ public class HomePage extends AppCompatActivity {
                 Toast.makeText(HomePage.this,"Please try again!", Toast.LENGTH_SHORT);
             }
         });
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.store_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        list = new ArrayList<>();
+        myAdapterHP = new MyAdapterHP(this, list);
+        recyclerView.setAdapter(myAdapterHP);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Users user = dataSnapshot.getValue(Users.class);
+                    if (user.getStoreOwner() == 1) {
+                        list.add(user);
+                    }
+                    myAdapterHP.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
     }
 
     public void TextView (View view) {
