@@ -1,6 +1,7 @@
 package com.example.dekanji;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -44,6 +46,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             {
                 if (item.getItemId() == R.id.menu_edit){
                     Toast.makeText(context, "edit", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, mystoree.class);
+                      intent.putExtra("Edit", (Serializable) products);
 
                 }
                 if (item.getItemId() == R.id.menu_remove){

@@ -2,6 +2,7 @@ package com.example.dekanji;
 
 public class Products {
     private String userID, productName, price, email;
+    private int productID, active;
 
     public Products() { }
 
@@ -9,6 +10,9 @@ public class Products {
         this.userID = userID;
         this.productName = productName;
         this.price = price;
+        this.active = 1;
+        this.productID = Global.globalProdID;
+        Global.globalProdID ++;
     }
 
 
