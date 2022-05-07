@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class mystoree extends AppCompatActivity {
 
@@ -40,6 +41,13 @@ public class mystoree extends AppCompatActivity {
     MyAdapter myAdapter;
     ArrayList<Products> list;
 
+    EditText input_product_name;
+    EditText input_price;
+    Button btn_add_prod;
+
+    Products prod;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +62,30 @@ public class mystoree extends AppCompatActivity {
 
         TextView tv_name_disp = (TextView) findViewById(R.id.tv_name_disp);
         TextView tv_store_name_mystore = (TextView) findViewById(R.id.tv_store_name_mystore);
+
+        recyclerView = findViewById(R.id.product_list);
+
+        input_product_name = (EditText) findViewById(R.id.input_product_name);
+        input_price = (EditText) findViewById(R.id.input_price);
+        btn_add_prod = (Button) findViewById(R.id.btn_add_product);
+
+        if (getIntent() != null && getIntent().getExtras() != null && getIntent().hasExtra("EDIT")){
+            prod = (Products) getIntent().getSerializableExtra("EDIT");
+            Toast.makeText(this, prod.getProductID(), Toast.LENGTH_SHORT).show();
+        }
+
+//
+//        if (prod == null) {
+//            btn_add_prod.setText("Add");
+//            recyclerView.setVisibility(View.VISIBLE);
+//        }
+//        else {
+//
+//            input_price.setText(prod.getPrice().toString());
+//            input_product_name.setText(prod.getProductName().toString());
+//            btn_add_prod.setText("Update");
+//            recyclerView.setVisibility(View.GONE);
+//        }
 
         referenceUsers.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,7 +103,6 @@ public class mystoree extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.product_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -98,6 +129,8 @@ public class mystoree extends AppCompatActivity {
                 Toast.makeText(mystoree.this,"Please try again!", Toast.LENGTH_SHORT);
             }
         });
+
+
     }
 
     public void TextView (View view) {
@@ -120,12 +153,42 @@ public class mystoree extends AppCompatActivity {
 
             if (!product_name.isEmpty() && !product_price.isEmpty()){
 
+//                if (prod == null) {
                 //add item to database
                 Products product = new Products(userID, product_name, product_price);
                 referenceProducts.push().setValue(product);
-                Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
                 finish();
                 startActivity(new Intent(mystoree.this, mystoree.class));
+//                }
+//                if (prod != null) {
+//                    int edit_prod_id = prod.getProductID();
+//                    final String[] edit_key = new String[1];
+//
+//                    referenceProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+//
+//                                Products product = dataSnapshot.getValue(Products.class);
+//                                if (product.getProductID() == (edit_prod_id)){
+//                                    edit_key[0] = dataSnapshot.getKey();
+//                                    break;
+//                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+//                    HashMap<String, Object> hashMap = new HashMap<>();
+//                    hashMap.put("productName",input_product_name.toString());
+//                    hashMap.put("price",input_price.toString());
+//                    referenceProducts.child(edit_key.toString()).updateChildren(hashMap);
+//                }
+
             }
         }
     }

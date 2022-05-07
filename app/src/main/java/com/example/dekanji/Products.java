@@ -1,7 +1,9 @@
 package com.example.dekanji;
 
-public class Products {
-    private String userID, productName, price, email;
+import java.io.Serializable;
+
+public class Products implements Serializable {
+    private String userID, productName, price;
     private int productID, active;
 
     public Products() { }
@@ -15,6 +17,21 @@ public class Products {
         Global.globalProdID ++;
     }
 
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
 
     public String getUserID() {
         return userID;

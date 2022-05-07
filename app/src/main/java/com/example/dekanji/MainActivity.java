@@ -23,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
@@ -69,7 +72,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void userLogin(){
-        mAuth.signInWithEmailAndPassword(input_email,input_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        String hashed = null;
+
+        //hashing the password
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+            md.update(input_password.getBytes());
+
+            byte[] digest = md.digest();
+            StringBuffer sb = new StringBuffer();
+
+            for (byte b : digest) {
+                sb.append(String.format("%02x",b & 0xff));
+            }
+            hashed = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        mAuth.signInWithEmailAndPassword(input_email,hashed).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){

@@ -2,6 +2,7 @@ package com.example.dekanji;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Products> list;
+
 
     public MyAdapter(Context context, ArrayList<Products> list) {
         this.context = context;
@@ -44,15 +46,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             popupMenu.inflate(R.menu.options_menu);
             popupMenu.setOnMenuItemClickListener(item->
             {
-                if (item.getItemId() == R.id.menu_edit){
-                    Toast.makeText(context, "edit", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, mystoree.class);
-                      intent.putExtra("Edit", (Serializable) products);
+                switch (item.getItemId())
+                {
+                    case R.id.menu_edit:
+                        Toast.makeText(context, "edit", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, mystoree.class);
+                        intent.putExtra("EDIT", products);
+                        context.startActivity(intent);
 
-                }
-                if (item.getItemId() == R.id.menu_remove){
-                    Toast.makeText(context, "remove", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.menu_remove:
+                        Toast.makeText(context, "remove", Toast.LENGTH_SHORT).show();
 
+                        break;
                 }
                 return false;
             });

@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class StoreOwner extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -73,13 +74,34 @@ public class StoreOwner extends AppCompatActivity {
             && !reg_storeowner_location.isEmpty() && !reg_storeowner_phonenumber.isEmpty() && !reg_storeowner_description.isEmpty()){
                 //check if passwords match
                 if (reg_storeowner_password.equals(reg_storeowner_conf_password)){
+                    String hashed = null;
+
+                    //hashing the password
+                    MessageDigest md = null;
+                    try {
+                        md = MessageDigest.getInstance("SHA-256");
+                        md.update(reg_storeowner_password.getBytes());
+
+                        byte[] digest = md.digest();
+                        StringBuffer sb = new StringBuffer();
+
+                        for (byte b : digest) {
+                            sb.append(String.format("%02x",b & 0xff));
+                        }
+                        hashed = sb.toString();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+
+
                     //check if username is found in database and insert into database all credentials
-                    mAuth.createUserWithEmailAndPassword(reg_storeowner_email, reg_storeowner_password)
+                    String finalHashed = hashed;
+                    mAuth.createUserWithEmailAndPassword(reg_storeowner_email, finalHashed)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
-                                        Users storeOwnerUser = new Users(reg_storeowner_name,reg_storeowner_email,reg_storeowner_password, 1,
+                                        Users storeOwnerUser = new Users(reg_storeowner_name,reg_storeowner_email, finalHashed, 1,
                                                 reg_storeowner_storename,reg_storeowner_location,reg_storeowner_phonenumber,reg_storeowner_description);
 
                                         FirebaseDatabase.getInstance().getReference("Users")

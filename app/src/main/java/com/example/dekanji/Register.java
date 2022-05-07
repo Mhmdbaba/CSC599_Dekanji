@@ -18,6 +18,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
@@ -62,13 +66,35 @@ public class Register extends AppCompatActivity {
                     && !reg_conf_password.isEmpty()){
                 //check if passwords match
                 if (reg_password.equals(reg_conf_password)){
+                    String hashed = null;
+
+                    //hashing the password
+                    MessageDigest md = null;
+                    try {
+                        md = MessageDigest.getInstance("SHA-256");
+                        md.update(reg_password.getBytes());
+
+                        byte[] digest = md.digest();
+                        StringBuffer sb = new StringBuffer();
+
+                        for (byte b : digest) {
+                            sb.append(String.format("%02x",b & 0xff));
+                        }
+                        hashed = sb.toString();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+
+//                    Toast.makeText(this, hashed, Toast.LENGTH_SHORT).show();
+
                     //save to database
-                    mAuth.createUserWithEmailAndPassword(reg_email,reg_password)
+                    String finalHashed = hashed;
+                    mAuth.createUserWithEmailAndPassword(reg_email, finalHashed)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
-                                        Users user = new Users(reg_name,reg_email,reg_password,0);
+                                        Users user = new Users(reg_name,reg_email, finalHashed,0);
 
                                         FirebaseDatabase.getInstance().getReference("Users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
