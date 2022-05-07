@@ -18,9 +18,6 @@
             android:label="@string/title_activity_user_profile"
             android:theme="@style/Theme.Dekanji.NoActionBar" />
         <activity
-            android:name=".mystore"
-            android:exported="false" />
-        <activity
             android:name=".HomePage"
             android:exported="false" />
         <activity

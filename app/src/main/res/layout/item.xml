@@ -6,7 +6,17 @@
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp"
     android:layout_margin="16dp">
-    
+
+    <TextView
+        android:id="@+id/txt_options"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:text="&#8942;"
+        android:textSize="20dp"
+        android:layout_gravity="right"
+        android:clickable="true"
+        />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,13 +56,13 @@
                 android:layout_marginLeft="8dp"
                 android:text="*Product Price*"
                 android:textColor="@color/black"
-                android:textSize="20dp"/>
+                android:textSize="20dp" />
 
 
         </LinearLayout>
 
 
     </LinearLayout>
-    
+
 
 </androidx.cardview.widget.CardView>
