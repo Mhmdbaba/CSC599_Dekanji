@@ -42,8 +42,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         products = list.get(position);
+
         holder.product_name.setText(products.getProductName());
         holder.price.setText(products.getPrice());
         holder.txt_options.setOnClickListener(v->

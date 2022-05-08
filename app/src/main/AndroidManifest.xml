@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dekanji">
         <activity
+            android:name=".mystore"
+            android:exported="false" />
+        <activity
             android:name=".StoreDisplay"
             android:exported="false" />
         <activity
