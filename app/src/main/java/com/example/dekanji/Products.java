@@ -4,7 +4,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
-public class Products  {
+public class Products implements Serializable {
     private String userID, productName, price;
     private int productID, active;
 
