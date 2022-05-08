@@ -13,6 +13,6 @@ public class Test extends AppCompatActivity {
         setContentView(R.layout.activity_test);
 
         Users prod = (Users) getIntent().getSerializableExtra("EDIT");
-        Toast.makeText(this, prod.getStoreName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, prod.getName(), Toast.LENGTH_SHORT).show();
     }
 }

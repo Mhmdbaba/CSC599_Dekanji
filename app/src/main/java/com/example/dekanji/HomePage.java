@@ -103,7 +103,7 @@ public class HomePage extends AppCompatActivity implements MyAdapterHP.OnNoteLis
     @Override
     public void onNoteClick(int position) {
         Users u = list.get(position);
-        Intent intent = new Intent(this, Test.class);
+        Intent intent = new Intent(this, StoreDisplay.class);
         intent.putExtra("EDIT",u);
         startActivity(intent);
     }
