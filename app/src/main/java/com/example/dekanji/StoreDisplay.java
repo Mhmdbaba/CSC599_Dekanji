@@ -27,51 +27,35 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
 
     Users user;
     DatabaseReference referenceProducts;
+    DatabaseReference referenceUsers;
 
     RecyclerView recyclerView;
     MyAdapterSD myAdapterSD;
-    private ArrayList<Products> list;
+    private ArrayList<Products> arrayList;
 
-    String userID;
+    String StoreuserKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_display);
         user = (Users) getIntent().getSerializableExtra("EDIT");
-//        Toast.makeText(this, user.getName(), Toast.LENGTH_SHORT).show();
 
-        //Get the User ID
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        //Display Store name
-        TextView tv_storeName = (TextView) findViewById(R.id.tv_storeDisplay_storename);
-        tv_storeName.setText(user.getStoreName());
-
+        //reference the database
         referenceProducts = FirebaseDatabase.getInstance().getReference("Products");
-        recyclerView  =(RecyclerView) findViewById(R.id.items_list);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        referenceUsers = FirebaseDatabase.getInstance().getReference("Users");
 
-        list = new ArrayList<>();
-        myAdapterSD = new MyAdapterSD (this, list, this);
-        recyclerView.setAdapter(myAdapterSD);
-
-        //Reference the database
-        referenceProducts.addValueEventListener(new ValueEventListener() {
+        referenceUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Products products = dataSnapshot.getValue(Products.class);
-
-                    //User id getting is the one of the buyer, get the id by reference database on email
-                    Toast.makeText(StoreDisplay.this, userID, Toast.LENGTH_SHORT).show();
-                    if (products.getUserID().equals(userID)) {
-//                        Toast.makeText(StoreDisplay.this, products.getProductName(), Toast.LENGTH_SHORT).show();
-
-                        list.add(products);
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Users userDB = dataSnapshot.getValue(Users.class);
+                    if (userDB.getEmail().equals(user.getEmail())) {
+                        //get the key of the store owner from the database
+//                        userKey = dataSnapshot.child(dataSnapshot.getKey()).getKey();
+                        StoreuserKey = dataSnapshot.getKey();
+//                        Toast.makeText(StoreDisplay.this, userKey, Toast.LENGTH_SHORT).show();
                     }
-                    myAdapterSD.notifyDataSetChanged();
                 }
             }
 
@@ -82,7 +66,36 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
         });
 
 
+        //Display Store name
+        TextView tv_storeName = (TextView) findViewById(R.id.tv_storeDisplay_storename);
+        tv_storeName.setText(user.getStoreName());
 
+        recyclerView = (RecyclerView) findViewById(R.id.items_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        arrayList = new ArrayList<>();
+        myAdapterSD = new MyAdapterSD(this, arrayList, this);
+        recyclerView.setAdapter(myAdapterSD);
+
+        referenceProducts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Products prod = dataSnapshot.getValue(Products.class);
+                    if (prod.getUserID().equals(StoreuserKey)) {
+//                        Toast.makeText(StoreDisplay.this, StoreuserKey, Toast.LENGTH_SHORT).show();
+                        arrayList.add(prod);
+                    }
+                    myAdapterSD.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public  void ImgButton (View view) {
@@ -96,7 +109,8 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
 
     @Override
     public void onNoteClick(int position) { //see what will happen
-        Products p = list.get(position);
+        Products p = arrayList.get(position);
+        Toast.makeText(this, p.getProductName(), Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(this, ItemDisplay.class);
 //        intent.putExtra("EDIT",p);
 //        startActivity(intent);

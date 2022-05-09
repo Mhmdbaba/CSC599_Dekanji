@@ -68,6 +68,7 @@ public class HomePage extends AppCompatActivity implements MyAdapterHP.OnNoteLis
         myAdapterHP = new MyAdapterHP(this, list, this);
         recyclerView.setAdapter(myAdapterHP);
 
+        //get the products from database
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

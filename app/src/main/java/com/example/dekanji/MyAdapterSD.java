@@ -28,7 +28,7 @@ public class MyAdapterSD extends RecyclerView.Adapter<MyAdapterSD.MyViewHolder> 
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.item,parent, false);
-        return new MyViewHolder(v,monNoteListener);
+        return new MyViewHolder(v, monNoteListener);
     }
 
     @Override
@@ -37,12 +37,11 @@ public class MyAdapterSD extends RecyclerView.Adapter<MyAdapterSD.MyViewHolder> 
 
         holder.product_name.setText(products.getProductName());
         holder.product_price.setText(products.getPrice());
+        holder.txt_options.setVisibility(View.GONE);
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
-    }
+    public int getItemCount() { return list.size(); }
 
     public interface OnNoteListener {
         void onNoteClick (int position);
@@ -56,10 +55,10 @@ public class MyAdapterSD extends RecyclerView.Adapter<MyAdapterSD.MyViewHolder> 
         public MyViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
 
+
             txt_options = itemView.findViewById(R.id.txt_options);
-            txt_options.setVisibility(View.GONE);
-            product_name = itemView.findViewById(R.id.tv_cardview_storename);
-            product_price = itemView.findViewById(R.id.tv_cardview_location);
+            product_name = itemView.findViewById(R.id.tv_product_name);
+            product_price = itemView.findViewById(R.id.tv_product_price);
             this.onNoteListener = onNoteListener;
 
             itemView.setOnClickListener(this);
