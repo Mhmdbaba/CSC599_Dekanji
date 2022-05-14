@@ -35,11 +35,22 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
 
     String StoreuserKey;
 
+    ArrayList<Products> CartList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_display);
         user = (Users) getIntent().getSerializableExtra("EDIT");
+
+
+        //see if the cart has products
+        if (getIntent().getSerializableExtra("cart") != null) {
+            ArrayList<Products> temp = (ArrayList<Products>) getIntent().getSerializableExtra("cart");
+            for (int i = 0; i < temp.size(); i++) {
+                CartList.add(temp.get(i));
+            }
+        }
 
         //reference the database
         referenceProducts = FirebaseDatabase.getInstance().getReference("Products");
@@ -64,6 +75,8 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
 
             }
         });
+
+        CartList = new ArrayList<>();
 
 
         //Display Store name
@@ -106,7 +119,9 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
             startActivity(new Intent(this, HomePage.class));
         }
         if (btn.getTag().toString().equalsIgnoreCase("cart")) {
-//            startActivity(this, CartView.class);
+            Intent intent = new Intent(StoreDisplay.this, Cart.class);
+            intent.putExtra("productsList", CartList);
+            startActivity(intent);
         }
     }
 
@@ -114,6 +129,7 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
     public void onNoteClick(int position) { //see what will happen
         Products p = arrayList.get(position);
         Toast.makeText(this, p.getProductName(), Toast.LENGTH_SHORT).show();
+        CartList.add(p);
 //        Intent intent = new Intent(this, ItemDisplay.class);
 //        intent.putExtra("EDIT",p);
 //        startActivity(intent);
