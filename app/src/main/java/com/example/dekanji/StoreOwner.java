@@ -4,21 +4,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.security.MessageDigest;
@@ -26,6 +32,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class StoreOwner extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private StorageReference storageReference;
 
     String reg_storeowner_name;
     String reg_storeowner_email;
@@ -48,6 +55,7 @@ public class StoreOwner extends AppCompatActivity {
         setContentView(R.layout.activity_store_owner);
 
         mAuth = FirebaseAuth.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         reg_pic_display = (ImageView) findViewById(R.id.iv_regStore_pic_display);
     }
@@ -105,35 +113,50 @@ public class StoreOwner extends AppCompatActivity {
 
                     //check if username is found in database and insert into database all credentials
                     String finalHashed = hashed;
-                    mAuth.createUserWithEmailAndPassword(reg_storeowner_email, finalHashed)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                    //create file name with extension
+                    StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+
+                    //upload image to firebase
+                    fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()){
-                                        Users storeOwnerUser = new Users(reg_storeowner_name,reg_storeowner_email, finalHashed, 1,
-                                                reg_storeowner_storename,reg_storeowner_location,reg_storeowner_phonenumber,reg_storeowner_description);
+                                public void onSuccess(Uri uri) {
+                                    mAuth.createUserWithEmailAndPassword(reg_storeowner_email, finalHashed)
+                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if (task.isSuccessful()){
+                                                        Users storeOwnerUser = new Users(reg_storeowner_name,reg_storeowner_email, finalHashed, 1,
+                                                                reg_storeowner_storename,reg_storeowner_location,reg_storeowner_phonenumber,reg_storeowner_description, uri.toString());
 
-                                        FirebaseDatabase.getInstance().getReference("Users")
-                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(storeOwnerUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()){
-                                                    Log.i("Registration: ", "done");
+                                                        FirebaseDatabase.getInstance().getReference("Users")
+                                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                                .setValue(storeOwnerUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()){
+                                                                    Log.i("Registration: ", "done");
 
-                                                    //redirect tp login page
-                                                    finish();
-                                                    startActivity(new Intent(StoreOwner.this, MainActivity.class));
+                                                                    //redirect tp login page
+                                                                    finish();
+                                                                    startActivity(new Intent(StoreOwner.this, MainActivity.class));
+                                                                }
+                                                                else {
+                                                                    Toast.makeText(StoreOwner.this, "Failed to register! Please try again.", Toast.LENGTH_SHORT).show();
+                                                                    return;
+                                                                }
+                                                            }
+                                                        });
+                                                    }
                                                 }
-                                                else {
-                                                    Toast.makeText(StoreOwner.this, "Failed to register! Please try again.", Toast.LENGTH_SHORT).show();
-                                                    return;
-                                                }
-                                            }
-                                        });
-                                    }
+                                            });
                                 }
                             });
+                        }
+                    });
                 }
                 else {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
@@ -165,8 +188,16 @@ public class StoreOwner extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
 
-            Picasso.with(this).load(mImageUri).into(reg_pic_display);
+//            Picasso.with(this).load(mImageUri).into(reg_pic_display);
+            reg_pic_display.setImageURI(mImageUri);
         }
+    }
+
+    //get file extension from image
+    private String getFileExtension(Uri uri) {
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cr.getType(uri));
     }
 
 }

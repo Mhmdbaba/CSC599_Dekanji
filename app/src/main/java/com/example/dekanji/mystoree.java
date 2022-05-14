@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,6 +47,8 @@ public class mystoree extends AppCompatActivity {
     EditText input_price;
     Button btn_add_prod;
 
+    ImageView storeOwner_profileImg;
+
     Products prod;
 
 
@@ -61,6 +66,7 @@ public class mystoree extends AppCompatActivity {
 
         TextView tv_name_disp = (TextView) findViewById(R.id.tv_name_disp);
         TextView tv_store_name_mystore = (TextView) findViewById(R.id.tv_store_name_mystore);
+        storeOwner_profileImg = findViewById(R.id.storeOwner_profileImg);
 
         recyclerView = findViewById(R.id.product_list);
 
@@ -115,6 +121,9 @@ public class mystoree extends AppCompatActivity {
 
                 tv_name_disp.setText(profileUser.getName());
                 tv_store_name_mystore.setText(profileUser.getStoreName());
+
+                Uri imgUri = Uri.parse(profileUser.getmImageUrl());
+                Picasso.with(mystoree.this).load(imgUri).into(storeOwner_profileImg);
 
             }
 

@@ -9,6 +9,7 @@ public class Users implements Serializable {
     private String email;
     private String password;
     private String location;
+    private String mImageUrl;
 
     private int storeOwner; //if the user is a normal user then 0 else 1
 
@@ -16,19 +17,21 @@ public class Users implements Serializable {
     private String phoneNumber;
     private String description;
 
-    public Users(){}
+    public Users() {
+    }
 
     //for user credentials
-    public Users(String name, String email, String password, String location, int storeOwner) {
+    public Users(String name, String email, String password, String location, String mImageUrl, int storeOwner) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.location = location;
+        this.mImageUrl = mImageUrl;
         this.storeOwner = storeOwner;
     }
 
     //for store owners credentials
-    public Users(String name, String email, String password, int storeOwner, String storeName, String location, String phoneNumber, String description) {
+    public Users(String name, String email, String password, int storeOwner, String storeName, String location, String phoneNumber, String description, String mImageUrl) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -37,7 +40,12 @@ public class Users implements Serializable {
         this.location = location;
         this.phoneNumber = phoneNumber;
         this.description = description;
+        this.mImageUrl = mImageUrl;
     }
+
+    public String getmImageUrl() { return mImageUrl; }
+
+    public void setmImageUrl(String mImageUrl) { this.mImageUrl = mImageUrl; }
 
     public String getName() {
         return name;

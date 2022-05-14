@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -32,11 +35,15 @@ public class HomePage extends AppCompatActivity implements MyAdapterHP.OnNoteLis
     MyAdapterHP myAdapterHP;
     private ArrayList<Users> list;
 
+    ImageView homePage_profile_image;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        homePage_profile_image = (ImageView) findViewById(R.id.homePage_profileImg);
 
         TextView tv_name_homepage = (TextView) findViewById(R.id.tv_name_disp_homepage);
 
@@ -50,7 +57,12 @@ public class HomePage extends AppCompatActivity implements MyAdapterHP.OnNoteLis
                 profileUser = snapshot.getValue((Users.class));
 
                 tv_name_homepage.setText(profileUser.getName());
-                //Log.i("onDataChange: ", profileUser.getName());
+//                Log.i("onDataChange: ", profileUser.getName());
+
+                Toast.makeText(HomePage.this, profileUser.getmImageUrl(), Toast.LENGTH_SHORT).show();
+
+                Uri imgUri = Uri.parse(profileUser.getmImageUrl());
+                Picasso.with(HomePage.this).load(imgUri).into(homePage_profile_image);
             }
 
             @Override
@@ -59,6 +71,9 @@ public class HomePage extends AppCompatActivity implements MyAdapterHP.OnNoteLis
             }
         });
 
+
+
+//        homePage_profile_image.setImageURI(imgUri);
 
         recyclerView = (RecyclerView) findViewById(R.id.store_list);
         recyclerView.setHasFixedSize(true);

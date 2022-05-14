@@ -13,12 +13,13 @@
 
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/homePage_profileImg"
+            android:layout_width="111dp"
+            android:layout_height="111dp"
             android:layout_gravity="center|center_vertical"
             android:clickable="true"
             android:paddingTop="10dp"
-            android:src="@drawable/user" />
+            android:src="@drawable/user"/>
 
         <TextView
             android:layout_width="wrap_content"
