@@ -128,10 +128,7 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
     @Override
     public void onNoteClick(int position) { //see what will happen
         Products p = arrayList.get(position);
-        Toast.makeText(this, p.getProductName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Added to cart: " + p.getProductName(), Toast.LENGTH_SHORT).show();
         CartList.add(p);
-//        Intent intent = new Intent(this, ItemDisplay.class);
-//        intent.putExtra("EDIT",p);
-//        startActivity(intent);
     }
 }
