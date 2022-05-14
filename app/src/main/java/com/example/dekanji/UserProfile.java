@@ -62,6 +62,8 @@ public class UserProfile extends AppCompatActivity {
                 if (userProfile != null) {
                     String full_name = userProfile.getName();
                     String email = userProfile.getEmail();
+                    String location = userProfile.getLocation();
+
 
                     tv_welcome.setText("Welcome, " + full_name + "!");
 
@@ -69,10 +71,13 @@ public class UserProfile extends AppCompatActivity {
                     tv_name.setText(full_name);
                     tv_email.setText(email);
 
+                    tv_location.setVisibility(View.VISIBLE);
+                    tv_location.setText(location);
+                    tv_location_disp.setVisibility(View.VISIBLE);
+
                     //if the user is a store owner display store information
                     if (userProfile.getStoreOwner() == 1) {
                         String store_name = userProfile.getStoreName();
-                        String location = userProfile.getLocation();
                         String description = userProfile.getDescription();
                         String phone_number = userProfile.getPhoneNumber();
 
@@ -80,18 +85,15 @@ public class UserProfile extends AppCompatActivity {
                         tv_email.setVisibility(View.VISIBLE);
                         tv_phone_number.setVisibility(View.VISIBLE);
                         tv_description.setVisibility(View.VISIBLE);
-                        tv_location.setVisibility(View.VISIBLE);
 
                         //display store data
                         tv_store_name.setText(store_name);
-                        tv_location.setText(location);
                         tv_description.setText(description);
                         tv_phone_number.setText(phone_number);
 
                         //display store owners text views
                         tv_store_name_disp.setVisibility(View.VISIBLE);
                         tv_phone_number_disp.setVisibility(View.VISIBLE);
-                        tv_location_disp.setVisibility(View.VISIBLE);
                         tv_description_disp.setVisibility(View.VISIBLE);
 
                     }

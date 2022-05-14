@@ -1,9 +1,11 @@
 package com.example.dekanji;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -34,6 +37,10 @@ public class StoreOwner extends AppCompatActivity {
     String reg_storeowner_phonenumber;
     String reg_storeowner_description;
 
+    final private static int PICK_IMAGE_REQUEST = 1;
+    private ImageView reg_pic_display;
+    private Uri mImageUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,8 @@ public class StoreOwner extends AppCompatActivity {
         setContentView(R.layout.activity_store_owner);
 
         mAuth = FirebaseAuth.getInstance();
+
+        reg_pic_display = (ImageView) findViewById(R.id.iv_regStore_pic_display);
     }
 
     public void ImgButton (View view) {
@@ -135,9 +144,28 @@ public class StoreOwner extends AppCompatActivity {
                 Toast.makeText(this, "Enter all required Fields", Toast.LENGTH_SHORT).show();
                 return;
             }
+        }
+        if (btn.getTag().toString().equalsIgnoreCase("add picture")) {
+            openFileChooser();
+        }
+    }
 
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            Picasso.with(this).load(mImageUri).into(reg_pic_display);
         }
     }
 

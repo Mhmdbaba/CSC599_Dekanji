@@ -105,6 +105,9 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
             finish();
             startActivity(new Intent(this, HomePage.class));
         }
+        if (btn.getTag().toString().equalsIgnoreCase("cart")) {
+//            startActivity(this, CartView.class);
+        }
     }
 
     @Override

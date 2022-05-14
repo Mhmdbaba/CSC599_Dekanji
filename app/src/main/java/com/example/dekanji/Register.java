@@ -1,9 +1,11 @@
 package com.example.dekanji;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -28,13 +31,22 @@ public class Register extends AppCompatActivity {
 
     String reg_name;
     String reg_email;
+    String reg_address;
     String reg_password;
     String reg_conf_password;
+
+
+    final private static int PICK_IMAGE_REQUEST = 1;
+    private ImageView reg_pic_display;
+    private Uri mImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        reg_pic_display = (ImageView) findViewById(R.id.iv_reg_pic_display);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -60,10 +72,11 @@ public class Register extends AppCompatActivity {
             reg_email = ((EditText) findViewById(R.id.input_reg_email)).getText().toString().trim();
             reg_password = ((EditText) findViewById(R.id.input_reg_password)).getText().toString().trim();
             reg_conf_password = ((EditText) findViewById(R.id.input_reg_conf_password)).getText().toString().trim();
+            reg_address = ((EditText) findViewById(R.id.input_reg_address)).getText().toString().trim();
 
             //checks if fields are empty
             if (!reg_name.isEmpty() && !reg_email.isEmpty() && !reg_password.isEmpty()
-                    && !reg_conf_password.isEmpty()){
+                    && !reg_conf_password.isEmpty() && !reg_address.isEmpty()){
                 //check if passwords match
                 if (reg_password.equals(reg_conf_password)){
                     String hashed = null;
@@ -94,7 +107,7 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()){
-                                        Users user = new Users(reg_name,reg_email, finalHashed,0);
+                                        Users user = new Users(reg_name,reg_email, finalHashed, reg_address, 0);
 
                                         FirebaseDatabase.getInstance().getReference("Users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -134,6 +147,29 @@ public class Register extends AppCompatActivity {
                 return;
             }
 
+        }
+
+        if (btn.getTag().toString().equalsIgnoreCase("add picture")) {
+            openFileChooser();
+        }
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+        && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            Picasso.with(this).load(mImageUri).into(reg_pic_display);
         }
     }
 }
