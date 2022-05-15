@@ -75,7 +75,11 @@ public class Orders extends AppCompatActivity implements MyAdapterO.OnNoteListen
 
     @Override
     public void onNoteClick(int position) {
-
+        Order ord = cart.get(position);
+//        Toast.makeText(this, ord.getOrderMethod(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Orders.this, OrderItems.class);
+        intent.putExtra("order",ord);
+        startActivity(intent);
     }
 
     public void ImgButton (View view) {

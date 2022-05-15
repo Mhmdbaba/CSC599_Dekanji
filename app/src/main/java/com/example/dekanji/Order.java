@@ -1,8 +1,9 @@
 package com.example.dekanji;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Serializable {
     int OrderID, Total;
     String name, number, location, OrderMethod, status, storeID;
     ArrayList<Products> list;
