@@ -79,6 +79,7 @@ public class Orders extends AppCompatActivity implements MyAdapterO.OnNoteListen
 //        Toast.makeText(this, ord.getOrderMethod(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Orders.this, OrderItems.class);
         intent.putExtra("order",ord);
+        finish();
         startActivity(intent);
     }
 

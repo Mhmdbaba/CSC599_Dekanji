@@ -1,5 +1,6 @@
 package com.example.dekanji;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteListener{
@@ -21,10 +28,14 @@ public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteL
     TextView buyer_name, method, location, phoneNumber, total;
     RecyclerView rv;
 
+    DatabaseReference referenceOrders;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_items);
+
+        referenceOrders = FirebaseDatabase.getInstance().getReference("Orders");
 
         //get the order pressed from the past activity
          order = (Order) getIntent().getSerializableExtra("order");
@@ -67,8 +78,26 @@ public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteL
         Button btn = (Button) view;
 
         //set the order status to done
-        if (btn.getTag().toString().equalsIgnoreCase("add")){
+        if (btn.getTag().toString().equalsIgnoreCase("done")){
+            referenceOrders.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Order or = dataSnapshot.getValue(Order.class);
+//                        Toast.makeText(OrderItems.this, String.valueOf(or.getOrderID()), Toast.LENGTH_SHORT).show();
+                        if (or.getOrderID() == order.getOrderID()) {
+                            referenceOrders.child(dataSnapshot.getKey()).child("status").setValue("done");
+                            finish();
+                            startActivity(new Intent(OrderItems.this,Orders.class));
+                        }
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
     }
 
