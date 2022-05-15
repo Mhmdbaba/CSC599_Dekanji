@@ -1,6 +1,7 @@
 package com.example.dekanji;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -10,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class OrderItems extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteListener{
 
     Order order;
 
@@ -26,8 +29,12 @@ public class OrderItems extends AppCompatActivity {
          order = (Order) getIntent().getSerializableExtra("order");
 
          rv = findViewById(R.id.rv_buyer_orders);
+         rv.setHasFixedSize(true);
+         rv.setLayoutManager(new LinearLayoutManager(this));
 
-
+        ArrayList<Products> pr = order.getList();
+        MyAdapterSD myAdapterSD = new MyAdapterSD(this, pr, this);
+        rv.setAdapter(myAdapterSD);
 
 //         buyer_name = findViewById(R.id.tv_buyer_name_orders);
 //         method = findViewById(R.id.tv_buyer_method_orders);
@@ -53,5 +60,10 @@ public class OrderItems extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, Orders.class));
         }
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+
     }
 }
