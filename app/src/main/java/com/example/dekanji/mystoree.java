@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class mystoree extends AppCompatActivity {
+public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteListener {
 
     String product_name;
     String product_price;
@@ -40,23 +40,20 @@ public class mystoree extends AppCompatActivity {
     private Users profileUser;
 
     RecyclerView recyclerView;
-    MyAdapter myAdapter;
+    MyAdapterSD myAdapterSD;
     ArrayList<Products> list;
 
     EditText input_product_name;
     EditText input_price;
     Button btn_add_prod;
+    Button btn_delete_product;
 
     ImageView storeOwner_profileImg;
-
-    Products prod;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mystoree);
-
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         referenceUsers = FirebaseDatabase.getInstance().getReference("Users");
@@ -73,46 +70,26 @@ public class mystoree extends AppCompatActivity {
         input_product_name = (EditText) findViewById(R.id.input_product_name);
         input_price = (EditText) findViewById(R.id.input_price);
         btn_add_prod = (Button) findViewById(R.id.btn_add_product);
+        btn_delete_product = (Button) findViewById(R.id.btn_delete_product);
 
-
-        if (getIntent() != null && getIntent().getIntExtra("EDIT", 0) != 0){
-            int edit_prodID = getIntent().getIntExtra("EDIT", 0);
-//            referenceProducts.addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                                prod = dataSnapshot.getValue(Products.class);
-//                                if (prod.getProductID() == (edit_prodID)){
-//                                    break;
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-
-            Toast.makeText(this, String.valueOf(edit_prodID), Toast.LENGTH_SHORT).show();
+        //if the product was pressed from the recycler view to edit or delete
+        if (getIntent().getSerializableExtra("EDIT") != null) {
+            Products edit_prod = (Products) getIntent().getSerializableExtra("EDIT");
+//            Toast.makeText(this, edit_prod.getProductName(), Toast.LENGTH_SHORT).show();
+            recyclerView.setVisibility(View.GONE);
+            input_product_name.setText(edit_prod.getProductName());
+            input_price.setText(edit_prod.getPrice());
+            btn_add_prod.setText("update");
+            btn_delete_product.setVisibility(View.VISIBLE);
+        }
+        else if (getIntent().getSerializableExtra("EDIT") == null) {
+            recyclerView.setVisibility(View.VISIBLE);
+            input_product_name.setText("");
+            input_price.setText("");
+            btn_add_prod.setText("Add");
+            btn_delete_product.setVisibility(View.INVISIBLE);
         }
 
-//        prod = (Products) getIntent().getParcelableExtra("EDIT");
-//        Toast.makeText(this, prod.getProductID(), Toast.LENGTH_SHORT).show();
-
-
-//
-//        if (prod == null) {
-//            btn_add_prod.setText("Add");
-//            recyclerView.setVisibility(View.VISIBLE);
-//        }
-//        else {
-//
-//            input_price.setText(prod.getPrice().toString());
-//            input_product_name.setText(prod.getProductName().toString());
-//            btn_add_prod.setText("Update");
-//            recyclerView.setVisibility(View.GONE);
-//        }
 
         referenceUsers.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -137,8 +114,8 @@ public class mystoree extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new MyAdapter(this, list);
-        recyclerView.setAdapter(myAdapter);
+        myAdapterSD = new MyAdapterSD(this, list, this);
+        recyclerView.setAdapter(myAdapterSD);
 
         referenceProducts.addValueEventListener(new ValueEventListener() {
             @Override
@@ -147,11 +124,11 @@ public class mystoree extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     Products product = dataSnapshot.getValue(Products.class);
-                    if (product.getUserID().equals(userID)){
+                    if (product.getUserID().equals(userID) && product.getActive() == 1){
                         list.add(product);
                     }
                 }
-                myAdapter.notifyDataSetChanged();
+                myAdapterSD.notifyDataSetChanged();
             }
 
             @Override
@@ -177,53 +154,83 @@ public class mystoree extends AppCompatActivity {
 
         if (btn.getTag().toString().equalsIgnoreCase("add")){
 
-            //get inputs from user
-            product_name = ((EditText) findViewById(R.id.input_product_name)).getText().toString();
-            product_price = ((EditText) findViewById(R.id.input_price)).getText().toString();
+            if (getIntent().getSerializableExtra("EDIT") != null){
+                referenceProducts.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            Products temp = dataSnapshot.getValue(Products.class);
+                            if (temp.getProductID() == ((Products)getIntent().getSerializableExtra("EDIT")).getProductID()) {
+                                referenceProducts.child(dataSnapshot.getKey()).child("productName").setValue(input_product_name.getText().toString());
+                                referenceProducts.child(dataSnapshot.getKey()).child("price").setValue(input_price.getText().toString());
+                                break;
+                            }
+                        }
+                        finish();
+                        startActivity(new Intent(mystoree.this, mystoree.class));
+                    }
 
-            if (!product_name.isEmpty() && !product_price.isEmpty()){
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-//                if (prod == null) {
-                //add item to database
-                Products product = new Products(userID, product_name, product_price);
-                referenceProducts.push().setValue(product);
-//                Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(new Intent(mystoree.this, mystoree.class));
-//                }
-//                if (prod != null) {
-//                    int edit_prod_id = prod.getProductID();
-//                    final String[] edit_key = new String[1];
-//
-//                    referenceProducts.addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//
-//                                Products product = dataSnapshot.getValue(Products.class);
-//                                if (product.getProductID() == (edit_prod_id)){
-//                                    edit_key[0] = dataSnapshot.getKey();
-//                                    break;
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                    HashMap<String, Object> hashMap = new HashMap<>();
-//                    hashMap.put("productName",input_product_name.toString());
-//                    hashMap.put("price",input_price.toString());
-//                    referenceProducts.child(edit_key.toString()).updateChildren(hashMap);
-//                }
-
+                    }
+                });
             }
+
+            else {
+                //get inputs from user
+                product_name = ((EditText) findViewById(R.id.input_product_name)).getText().toString();
+                product_price = ((EditText) findViewById(R.id.input_price)).getText().toString();
+
+                if (!product_name.isEmpty() && !product_price.isEmpty()){
+
+                    //add item to database
+                    Products product = new Products(userID, product_name, product_price);
+                    referenceProducts.push().setValue(product);
+                    finish();
+                    startActivity(new Intent(mystoree.this, mystoree.class));
+
+                }
+            }
+        }
+
+        if (btn.getTag().toString().equalsIgnoreCase("delete")){
+            referenceProducts.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Products temp = dataSnapshot.getValue(Products.class);
+                        if (temp.getProductID() == ((Products)getIntent().getSerializableExtra("EDIT")).getProductID()) {
+                            referenceProducts.child(dataSnapshot.getKey()).child("active").setValue(0);
+                            break;
+                        }
+                    }
+                    finish();
+                    startActivity(new Intent(mystoree.this, mystoree.class));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
 
         if (btn.getTag().toString().equalsIgnoreCase("orders")) {
             startActivity(new Intent(mystoree.this, Orders.class));
         }
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        Products prod = list.get(position);
+
+        Toast.makeText(this, prod.getProductName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(mystoree.this, mystoree.class);
+        intent.putExtra("EDIT", prod);
+        finish();
+        startActivity(intent);
+
+
     }
 }

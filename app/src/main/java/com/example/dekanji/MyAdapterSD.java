@@ -36,7 +36,7 @@ public class MyAdapterSD extends RecyclerView.Adapter<MyAdapterSD.MyViewHolder> 
         Products products = list.get(position);
 
         holder.product_name.setText(products.getProductName());
-        holder.product_price.setText(products.getPrice());
+        holder.product_price.setText("$" + products.getPrice());
         holder.txt_options.setVisibility(View.GONE);
     }
 
