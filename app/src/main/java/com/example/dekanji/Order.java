@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Order {
     int OrderID, Total;
-    String name, number, location, OrderMethod, status;
+    String name, number, location, OrderMethod, status, storeID;
     ArrayList<Products> list;
 
     public Order (){}
 
-    public Order(String orderMethod, String name, String number, String location, ArrayList<Products> list, int total) {
+    public Order(String orderMethod, String name, String number, String location, ArrayList<Products> list, int total, String storeID) {
         this.OrderID = Global.globalOrderID;
         this.name = name;
         this.number = number;
@@ -18,7 +18,16 @@ public class Order {
         this.list = list;
         Total = total;
         this.status = "new";
+        this.storeID = storeID;
         Global.globalOrderID++;
+    }
+
+    public String getStoreID() {
+        return storeID;
+    }
+
+    public void setStoreID(String storeID) {
+        this.storeID = storeID;
     }
 
     public int getOrderID() {

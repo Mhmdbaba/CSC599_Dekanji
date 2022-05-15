@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dekanji">
         <activity
+            android:name=".Orders"
+            android:exported="false" />
+        <activity
             android:name=".Cart"
             android:exported="false" />
         <activity

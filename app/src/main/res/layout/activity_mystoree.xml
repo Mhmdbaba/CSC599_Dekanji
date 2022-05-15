@@ -37,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <TextView
         android:id="@+id/tv_store_name_mystore"
@@ -79,6 +79,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.535" />
+
+    <Button
+        android:id="@+id/btn_mystore_orders"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:onClick="Button"
+        android:tag="orders"
+        android:text="Orders"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.752"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
 
     <EditText
         android:id="@+id/input_price"

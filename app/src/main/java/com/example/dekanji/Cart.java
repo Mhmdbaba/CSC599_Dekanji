@@ -48,6 +48,9 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
     int total;
     String name, number, location;
 
+    Users StoreUser;
+    String StoreNumber;
+    String StoreKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,21 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
         userID = user.getUid();
         referenceUsers = FirebaseDatabase.getInstance().getReference("Users");
         referenceOrders = FirebaseDatabase.getInstance().getReference("Orders");
+
+        StoreKey = getIntent().getStringExtra("StoreKey");
+
+        referenceUsers.child(StoreKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                StoreUser = snapshot.getValue(Users.class);
+                StoreNumber = StoreUser.getPhoneNumber();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         referenceUsers.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -118,7 +136,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
 
             String orderMethod = checked_rb.getText().toString();
 
-            Order order = new Order(orderMethod, name, number, location, cart, total);
+            Order order = new Order(orderMethod, name, number, location, cart, total, StoreKey);
 
             referenceOrders.push().setValue(order);
             Toast.makeText(this, "Your order has been recorded", Toast.LENGTH_SHORT).show();

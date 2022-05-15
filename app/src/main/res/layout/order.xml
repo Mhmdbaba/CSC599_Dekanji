@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_order_buyer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="*Buyer Name*"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textAlignment="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_order_buyer_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="*Buyer Number*"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textAlignment="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_order_buyer_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="*Buyer Location*"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textAlignment="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_order_buyer_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="*Buyer Total*"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_order_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:text="*Method*"
+                android:gravity="right"
+                android:paddingRight="30dp"
+                android:textSize="20dp"
+                android:layout_gravity="right"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -221,5 +221,9 @@ public class mystoree extends AppCompatActivity {
 
             }
         }
+
+        if (btn.getTag().toString().equalsIgnoreCase("orders")) {
+            startActivity(new Intent(mystoree.this, Orders.class));
+        }
     }
 }
