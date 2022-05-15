@@ -96,7 +96,7 @@ public class StoreDisplay extends AppCompatActivity implements MyAdapterSD.OnNot
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Products prod = dataSnapshot.getValue(Products.class);
-                    if (prod.getUserID().equals(StoreuserKey)) {
+                    if (prod.getUserID().equals(StoreuserKey) && prod.getActive() == 1) {
 //                        Toast.makeText(StoreDisplay.this, StoreuserKey, Toast.LENGTH_SHORT).show();
                         arrayList.add(prod);
                     }

@@ -10,13 +10,12 @@ public class Products implements Serializable {
 
     public Products() { }
 
-    public Products(String userID, String productName, String price) {
+    public Products(String userID, String productName, String price, int productID) {
         this.userID = userID;
         this.productName = productName;
         this.price = price;
         this.active = 1;
-        this.productID = Global.globalProdID;
-        Global.globalProdID ++;
+        this.productID = productID;
     }
 
     public int getProductID() {

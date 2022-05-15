@@ -161,13 +161,14 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Products temp = dataSnapshot.getValue(Products.class);
                             if (temp.getProductID() == ((Products)getIntent().getSerializableExtra("EDIT")).getProductID()) {
-                                referenceProducts.child(dataSnapshot.getKey()).child("productName").setValue(input_product_name.getText().toString());
-                                referenceProducts.child(dataSnapshot.getKey()).child("price").setValue(input_price.getText().toString());
+                                referenceProducts.child(dataSnapshot.getKey().toString().trim()).child("productName").setValue(input_product_name.getText().toString());
+                                referenceProducts.child(dataSnapshot.getKey().toString().trim()).child("price").setValue(input_price.getText().toString());
+//                                Toast.makeText(mystoree.this, dataSnapshot.getKey().toString().trim(), Toast.LENGTH_SHORT).show();
                                 break;
                             }
                         }
-                        finish();
                         startActivity(new Intent(mystoree.this, mystoree.class));
+                        finish();
                     }
 
                     @Override
@@ -185,7 +186,9 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
                 if (!product_name.isEmpty() && !product_price.isEmpty()){
 
                     //add item to database
-                    Products product = new Products(userID, product_name, product_price);
+                    int prodID = Global.globalProdID;
+                    Global.globalProdID++;
+                    Products product = new Products(userID, product_name, product_price,prodID);
                     referenceProducts.push().setValue(product);
                     finish();
                     startActivity(new Intent(mystoree.this, mystoree.class));
@@ -225,7 +228,7 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
     public void onNoteClick(int position) {
         Products prod = list.get(position);
 
-        Toast.makeText(this, prod.getProductName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, prod.getProductName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(mystoree.this, mystoree.class);
         intent.putExtra("EDIT", prod);
         finish();
