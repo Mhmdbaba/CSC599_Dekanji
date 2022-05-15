@@ -29,8 +29,6 @@ import java.security.NoSuchAlgorithmException;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
-    int storeOwner = 0;
-
     String input_email;
     String input_password;
 
@@ -91,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //sign in using inputs
         mAuth.signInWithEmailAndPassword(input_email,hashed).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
