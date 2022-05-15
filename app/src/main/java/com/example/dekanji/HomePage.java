@@ -59,7 +59,7 @@ public class HomePage extends AppCompatActivity implements MyAdapterHP.OnNoteLis
                 tv_name_homepage.setText(profileUser.getName());
 //                Log.i("onDataChange: ", profileUser.getName());
 
-                Toast.makeText(HomePage.this, profileUser.getmImageUrl(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(HomePage.this, profileUser.getmImageUrl(), Toast.LENGTH_SHORT).show();
 
                 Uri imgUri = Uri.parse(profileUser.getmImageUrl());
                 Picasso.with(HomePage.this).load(imgUri).into(homePage_profile_image);

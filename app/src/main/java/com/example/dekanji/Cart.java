@@ -83,6 +83,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
                 profileUser = snapshot.getValue((Users.class));
                 name = profileUser.getName();
                 number = profileUser.getPhoneNumber();
+                Toast.makeText(Cart.this, name, Toast.LENGTH_SHORT).show();
                 location = profileUser.getLocation();
             }
 

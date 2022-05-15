@@ -37,12 +37,7 @@ public class Register extends AppCompatActivity {
     private StorageReference storageReference;
 
 
-    String reg_name;
-    String reg_email;
-    String reg_address;
-    String reg_password;
-    String reg_conf_password;
-
+    String reg_name, reg_email, reg_phoneNumber, reg_address, reg_password, reg_conf_password;
 
     final private static int PICK_IMAGE_REQUEST = 1;
     private ImageView reg_pic_display;
@@ -82,9 +77,10 @@ public class Register extends AppCompatActivity {
             reg_password = ((EditText) findViewById(R.id.input_reg_password)).getText().toString().trim();
             reg_conf_password = ((EditText) findViewById(R.id.input_reg_conf_password)).getText().toString().trim();
             reg_address = ((EditText) findViewById(R.id.input_reg_address)).getText().toString().trim();
+            reg_phoneNumber = ((EditText) findViewById(R.id.input_reg_number)).getText().toString().trim();
 
             //checks if fields are empty
-            if (!reg_name.isEmpty() && !reg_email.isEmpty() && !reg_password.isEmpty()
+            if (!reg_name.isEmpty() && !reg_email.isEmpty() && !reg_phoneNumber.isEmpty() && !reg_password.isEmpty()
                     && !reg_conf_password.isEmpty() && !reg_address.isEmpty() && mImageUri != null){
                 //check if passwords match
                 if (reg_password.equals(reg_conf_password)){
@@ -127,7 +123,7 @@ public class Register extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                                     if (task.isSuccessful()) {
-                                                        Users user = new Users(reg_name,reg_email, finalHashed, reg_address,
+                                                        Users user = new Users(reg_name,reg_email, reg_phoneNumber, finalHashed, reg_address,
                                                                 uri.toString(), 0);
 
                                                         FirebaseDatabase.getInstance().getReference("Users")
@@ -156,15 +152,8 @@ public class Register extends AppCompatActivity {
                                             });
                                 }
                             });
-
                         }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(Register.this, "Image upload failed!", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    });
                 }
                 else {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();

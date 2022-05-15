@@ -10,20 +10,22 @@ public class Users implements Serializable {
     private String password;
     private String location;
     private String mImageUrl;
+    private String phoneNumber;
+
 
     private int storeOwner; //if the user is a normal user then 0 else 1
 
     private String storeName;
-    private String phoneNumber;
     private String description;
 
     public Users() {
     }
 
     //for user credentials
-    public Users(String name, String email, String password, String location, String mImageUrl, int storeOwner) {
+    public Users(String name, String email, String phoneNumber, String password, String location, String mImageUrl, int storeOwner) {
         this.name = name;
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.password = password;
         this.location = location;
         this.mImageUrl = mImageUrl;
