@@ -26,7 +26,7 @@ Mohammad Elbaba
 <br>
 <br>
 <br>
-![Image not Available](https://github.com/Mhmdbaba/CSC599_Dekanji/blob/main/Extras/Dekanji.png?raw=true)
+<img src="/Extras/Dekanji.png" alt="Image not available">
 </p>
 
 
