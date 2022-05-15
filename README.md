@@ -26,7 +26,7 @@ Mohammad Elbaba
 <br>
 <br>
 <br>
-<img src="/Extras/Dekanji.png" alt="Image not available">
+<img src="/Extras/Dekanji.png" style="width:200px; height:200px;" alt="Image not available">
 </p>
 
 
