@@ -79,25 +79,31 @@ public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteL
 
         //set the order status to done
         if (btn.getTag().toString().equalsIgnoreCase("done")){
-            referenceOrders.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Order or = dataSnapshot.getValue(Order.class);
-//                        Toast.makeText(OrderItems.this, String.valueOf(or.getOrderID()), Toast.LENGTH_SHORT).show();
-                        if (or.getOrderID() == order.getOrderID()) {
-                            referenceOrders.child(dataSnapshot.getKey()).child("status").setValue("done");
-                            finish();
-                            startActivity(new Intent(OrderItems.this,Orders.class));
-                        }
-                    }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            //set the status to done
+            referenceOrders.child(order.getOrderID()).child("status").setValue("done");
+            finish();
+            startActivity(new Intent(OrderItems.this,Orders.class));
 
-                }
-            });
+//            referenceOrders.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                        Order or = dataSnapshot.getValue(Order.class);
+////                        Toast.makeText(OrderItems.this, String.valueOf(or.getOrderID()), Toast.LENGTH_SHORT).show();
+//                        if (or.getOrderID() == order.getOrderID()) {
+//                            referenceOrders.child(dataSnapshot.getKey()).child("status").setValue("done");
+//                            finish();
+//                            startActivity(new Intent(OrderItems.this,Orders.class));
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
         }
     }
 

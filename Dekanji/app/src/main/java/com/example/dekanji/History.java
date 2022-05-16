@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class Orders extends AppCompatActivity implements MyAdapterO.OnNoteListener {
+public class History extends AppCompatActivity implements MyAdapterO.OnNoteListener {
 
     FirebaseUser user;
     String userID;
@@ -36,14 +35,13 @@ public class Orders extends AppCompatActivity implements MyAdapterO.OnNoteListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orders);
+        setContentView(R.layout.activity_history);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
         referenceOrders = FirebaseDatabase.getInstance().getReference("Orders");
 
-
-        cartView = (RecyclerView) findViewById(R.id.rv_store_orders);
+        cartView = (RecyclerView) findViewById(R.id.rv_history);
         cartView.setHasFixedSize(true);
         cartView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -51,16 +49,13 @@ public class Orders extends AppCompatActivity implements MyAdapterO.OnNoteListen
         myAdapterO = new MyAdapterO(this, cart,this);
         cartView.setAdapter(myAdapterO);
 
-        //get orders from database and show to store owner
         referenceOrders.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     Order order = dataSnapshot.getValue(Order.class);
-                    if (order.getStatus().equalsIgnoreCase("new") && order.getStoreID().trim().equals(userID.trim())) {
-//                        Toast.makeText(Orders.this, userID, Toast.LENGTH_SHORT).show();
+                    if (order.getStoreID().trim().equals(userID.trim())) {
                         cart.add(order);
-//                        Toast.makeText(Orders.this, String.valueOf(t), Toast.LENGTH_SHORT).show();
                     }
                     myAdapterO.notifyDataSetChanged();
                 }
@@ -68,36 +63,23 @@ public class Orders extends AppCompatActivity implements MyAdapterO.OnNoteListen
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Orders.this, "Failed. Please try again!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(History.this, "Failed. Please try again!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onNoteClick(int position) {
-        Order ord = cart.get(position);
-//        Toast.makeText(this, ord.getOrderMethod(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Orders.this, OrderItems.class);
-        intent.putExtra("order",ord);
-        finish();
-        startActivity(intent);
-    }
 
-    public void Button (View view) {
-        Button btn = (Button) view;
-
-        if (btn.getTag().toString().equalsIgnoreCase("history")) {
-            finish();
-            startActivity(new Intent(Orders.this, History.class));
-        }
     }
 
     public void ImgButton (View view) {
-        ImageView btn = (ImageView) view;
+        ImageView iv = (ImageView) view;
 
-        if (btn.getTag().toString().equalsIgnoreCase("back")) {
+        //when the user presses the back button
+        if (iv.getTag().toString().equalsIgnoreCase("back")){
             finish();
-            startActivity(new Intent(this, mystoree.class));
+            startActivity(new Intent(History.this, Orders.class));
         }
     }
 }

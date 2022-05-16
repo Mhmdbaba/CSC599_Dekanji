@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Order implements Serializable {
-    int OrderID, Total;
-    String name, number, location, OrderMethod, status, storeID;
+    int Total;
+    String name, number, location, OrderMethod, status, storeID, OrderID;
     ArrayList<Products> list;
 
     public Order (){}
 
-    public Order(String orderMethod, String name, String number, String location, ArrayList<Products> list, int total, String storeID) {
-        this.OrderID = Global.globalOrderID;
+    public Order(String orderMethod, String name, String number, String location, ArrayList<Products> list, int total, String storeID, String OrderID) {
+        this.OrderID = OrderID;
         this.name = name;
         this.number = number;
         this.location = location;
@@ -20,7 +20,6 @@ public class Order implements Serializable {
         Total = total;
         this.status = "new";
         this.storeID = storeID;
-        Global.globalOrderID++;
     }
 
     public String getStoreID() {
@@ -31,11 +30,11 @@ public class Order implements Serializable {
         this.storeID = storeID;
     }
 
-    public int getOrderID() {
+    public String getOrderID() {
         return OrderID;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(String orderID) {
         OrderID = orderID;
     }
 

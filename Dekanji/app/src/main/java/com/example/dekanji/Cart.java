@@ -83,7 +83,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
                 profileUser = snapshot.getValue((Users.class));
                 name = profileUser.getName();
                 number = profileUser.getPhoneNumber();
-                Toast.makeText(Cart.this, name, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Cart.this, name, Toast.LENGTH_SHORT).show();
                 location = profileUser.getLocation();
             }
 
@@ -137,9 +137,13 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
 
             String orderMethod = checked_rb.getText().toString();
 
-            Order order = new Order(orderMethod, name, number, location, cart, total, StoreKey);
 
-            referenceOrders.push().setValue(order);
+            String orderID = referenceOrders.push().getKey();
+
+            Order order = new Order(orderMethod, name, number, location, cart, total, StoreKey, orderID);
+
+            referenceOrders.child(orderID).setValue(order);
+
             Toast.makeText(this, "Your order has been recorded", Toast.LENGTH_SHORT).show();
         }
     }

@@ -47,6 +47,7 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
     EditText input_price;
     Button btn_add_prod;
     Button btn_delete_product;
+    Button btn_mystore_orders;
 
     ImageView storeOwner_profileImg;
 
@@ -71,6 +72,7 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
         input_price = (EditText) findViewById(R.id.input_price);
         btn_add_prod = (Button) findViewById(R.id.btn_add_product);
         btn_delete_product = (Button) findViewById(R.id.btn_delete_product);
+        btn_mystore_orders = (Button) findViewById(R.id.btn_mystore_orders);
 
         //if the product was pressed from the recycler view to edit or delete
         if (getIntent().getSerializableExtra("EDIT") != null) {
@@ -81,6 +83,7 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
             input_price.setText(edit_prod.getPrice());
             btn_add_prod.setText("update");
             btn_delete_product.setVisibility(View.VISIBLE);
+            btn_mystore_orders.setVisibility(View.GONE);
         }
         else if (getIntent().getSerializableExtra("EDIT") == null) {
             recyclerView.setVisibility(View.VISIBLE);
@@ -88,6 +91,7 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
             input_price.setText("");
             btn_add_prod.setText("Add");
             btn_delete_product.setVisibility(View.INVISIBLE);
+            btn_mystore_orders.setVisibility(View.VISIBLE);
         }
 
 
