@@ -155,27 +155,36 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
         if (btn.getTag().toString().equalsIgnoreCase("add")){
 
             if (getIntent().getSerializableExtra("EDIT") != null){
-                referenceProducts.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            Products temp = dataSnapshot.getValue(Products.class);
-                            if (temp.getProductID() == ((Products)getIntent().getSerializableExtra("EDIT")).getProductID()) {
-                                referenceProducts.child(dataSnapshot.getKey().toString().trim()).child("productName").setValue(input_product_name.getText().toString());
-                                referenceProducts.child(dataSnapshot.getKey().toString().trim()).child("price").setValue(input_price.getText().toString());
-//                                Toast.makeText(mystoree.this, dataSnapshot.getKey().toString().trim(), Toast.LENGTH_SHORT).show();
-                                break;
-                            }
-                        }
-                        startActivity(new Intent(mystoree.this, mystoree.class));
-                        finish();
-                    }
+                referenceProducts.child(((Products)getIntent().getSerializableExtra("EDIT")).getProductID()).child("productName").setValue(input_product_name.getText().toString());
+                referenceProducts.child(((Products)getIntent().getSerializableExtra("EDIT")).getProductID()).child("price").setValue(input_price.getText().toString());
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                //restart activity
+                startActivity(new Intent(mystoree.this, mystoree.class));
+                finish();
+                //when i added the key as a productID it was easier to update the values in the database. The method below is not required anymore
+//                referenceProducts.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                            Products temp = dataSnapshot.getValue(Products.class);
+//                            if (temp.getProductID().toString().trim() ==
+//                                    ((Products)getIntent().getSerializableExtra("EDIT")).getProductID().toString().trim()) {
+//                                Toast.makeText(mystoree.this, "hello", Toast.LENGTH_SHORT).show();
+//                                referenceProducts.child(dataSnapshot.getKey().toString().trim()).child("productName").setValue(input_product_name.getText().toString());
+//                                referenceProducts.child(dataSnapshot.getKey().toString().trim()).child("price").setValue(input_price.getText().toString());
+////                                Toast.makeText(mystoree.this, dataSnapshot.getKey().toString().trim(), Toast.LENGTH_SHORT).show();
+//                                break;
+//                            }
+//                        }
+//                        startActivity(new Intent(mystoree.this, mystoree.class));
+//                        finish();
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
             }
 
             else {
@@ -186,10 +195,11 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
                 if (!product_name.isEmpty() && !product_price.isEmpty()){
 
                     //add item to database
-                    int prodID = Global.globalProdID;
-                    Global.globalProdID++;
+                    String prodID = referenceProducts.push().getKey();
                     Products product = new Products(userID, product_name, product_price,prodID);
-                    referenceProducts.push().setValue(product);
+                    referenceProducts.child(prodID).setValue(product);
+
+                    //restart activity
                     finish();
                     startActivity(new Intent(mystoree.this, mystoree.class));
 
@@ -198,25 +208,30 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
         }
 
         if (btn.getTag().toString().equalsIgnoreCase("delete")){
-            referenceProducts.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Products temp = dataSnapshot.getValue(Products.class);
-                        if (temp.getProductID() == ((Products)getIntent().getSerializableExtra("EDIT")).getProductID()) {
-                            referenceProducts.child(dataSnapshot.getKey()).child("active").setValue(0);
-                            break;
-                        }
-                    }
-                    finish();
-                    startActivity(new Intent(mystoree.this, mystoree.class));
-                }
+            referenceProducts.child(((Products)getIntent().getSerializableExtra("EDIT")).getProductID()).child("active").setValue(0);
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            //restart activity
+            finish();
+            startActivity(new Intent(mystoree.this, mystoree.class));
+//            referenceProducts.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                        Products temp = dataSnapshot.getValue(Products.class);
+//                        if (temp.getProductID() == ((Products)getIntent().getSerializableExtra("EDIT")).getProductID()) {
+//                            referenceProducts.child(dataSnapshot.getKey()).child("active").setValue(0);
+//                            break;
+//                        }
+//                    }
+//                    finish();
+//                    startActivity(new Intent(mystoree.this, mystoree.class));
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            });
         }
 
         if (btn.getTag().toString().equalsIgnoreCase("orders")) {

@@ -5,12 +5,12 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 public class Products implements Serializable {
-    private String userID, productName, price;
-    private int productID, active;
+    private String userID, productName, price, productID;
+    private int active;
 
     public Products() { }
 
-    public Products(String userID, String productName, String price, int productID) {
+    public Products(String userID, String productName, String price, String productID) {
         this.userID = userID;
         this.productName = productName;
         this.price = price;
@@ -18,11 +18,11 @@ public class Products implements Serializable {
         this.productID = productID;
     }
 
-    public int getProductID() {
+    public String getProductID() {
         return productID;
     }
 
-    public void setProductID(int productID) {
+    public void setProductID(String productID) {
         this.productID = productID;
     }
 
