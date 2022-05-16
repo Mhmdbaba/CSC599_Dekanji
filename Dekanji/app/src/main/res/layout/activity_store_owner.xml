@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".StoreOwner">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_regStore_pic_display"
         android:layout_width="111dp"
         android:layout_height="114dp"

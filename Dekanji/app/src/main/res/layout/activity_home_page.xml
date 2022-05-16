@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/homePage_profileImg"
             android:layout_width="111dp"
             android:layout_height="111dp"
