@@ -43,13 +43,9 @@ public class mystoree extends AppCompatActivity implements MyAdapterSD.OnNoteLis
     MyAdapterSD myAdapterSD;
     ArrayList<Products> list;
 
-    EditText input_product_name;
-    EditText input_price;
+    EditText input_product_name, input_price;
     Button btn_add_prod, btn_delete_product, btn_mystore_orders;
-    ImageView iv_storedisplay_back;
-
-
-    ImageView storeOwner_profileImg;
+    ImageView iv_storedisplay_back, storeOwner_profileImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,15 +34,8 @@ public class StoreOwner extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private StorageReference storageReference;
 
-    String reg_storeowner_name;
-    String reg_storeowner_email;
-    String reg_storeowner_password;
-    String reg_storeowner_conf_password;
-
-    String reg_storeowner_storename;
-    String reg_storeowner_location;
-    String reg_storeowner_phonenumber;
-    String reg_storeowner_description;
+    String reg_storeowner_name, reg_storeowner_email, reg_storeowner_password, reg_storeowner_conf_password,
+            reg_storeowner_storename, reg_storeowner_location, reg_storeowner_phonenumber, reg_storeowner_description;
 
     final private static int PICK_IMAGE_REQUEST = 1;
     private ImageView reg_pic_display;

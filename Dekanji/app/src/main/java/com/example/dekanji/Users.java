@@ -5,18 +5,12 @@ import java.io.Serializable;
 public class Users implements Serializable {
 
     //user credentials
-    private String name;
-    private String email;
-    private String password;
-    private String location;
-    private String mImageUrl;
-    private String phoneNumber;
+    private String name, email, password, location, mImageUrl, phoneNumber;
 
 
     private int storeOwner; //if the user is a normal user then 0 else 1
 
-    private String storeName;
-    private String description;
+    private String storeName, description;
 
     public Users() {
     }

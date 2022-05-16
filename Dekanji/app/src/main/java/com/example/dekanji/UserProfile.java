@@ -26,8 +26,6 @@ public class UserProfile extends AppCompatActivity {
     private String userID;
     Users userProfile;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

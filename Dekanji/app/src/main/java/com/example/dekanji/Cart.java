@@ -27,14 +27,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListener{
+public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListener {
 
     FirebaseUser user;
     private String userID;
-    DatabaseReference referenceUsers;
-    DatabaseReference referenceOrders;
+    DatabaseReference referenceUsers, referenceOrders;
 
-    Users profileUser;
+    Users profileUser, StoreUser;
 
     ArrayList<Products> cart;
     RecyclerView cartView;
@@ -46,11 +45,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
     RadioButton checked_rb;
 
     int total;
-    String name, number, location;
-
-    Users StoreUser;
-    String StoreNumber;
-    String StoreKey;
+    String name, number, location, StoreNumber, StoreKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +84,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Cart.this,"Please try again!", Toast.LENGTH_SHORT);
+                Toast.makeText(Cart.this, "Please try again!", Toast.LENGTH_SHORT);
             }
         });
 
@@ -105,8 +100,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
             tv_emptyCart.setVisibility(View.VISIBLE);
             btn_checkout.setVisibility(View.INVISIBLE);
             rg_method.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             tv_emptyCart.setVisibility(View.GONE);
             btn_checkout.setVisibility(View.VISIBLE);
             rg_method.setVisibility(View.VISIBLE);
@@ -115,7 +109,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
                 total += Integer.parseInt(cart.get(i).getPrice());
             }
 
-            tv_total.setText("Total: $" +total);
+            tv_total.setText("Total: $" + total);
         }
 
 //        Toast.makeText(this, cart.get(0).getProductName(), Toast.LENGTH_SHORT).show();
@@ -129,15 +123,13 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
 
     }
 
-    public void Button (View view) {
+    public void Button(View view) {
         Button btn = (Button) view;
 
-        if (btn.getTag().toString().equalsIgnoreCase("checkout")){
+        if (btn.getTag().toString().equalsIgnoreCase("checkout")) {
             checked_rb = (RadioButton) findViewById(rg_method.getCheckedRadioButtonId());
 
             String orderMethod = checked_rb.getText().toString();
-
-
             String orderID = referenceOrders.push().getKey();
 
             Order order = new Order(orderMethod, name, number, location, cart, total, StoreKey, orderID);
@@ -151,7 +143,7 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
         }
     }
 
-    public void ImgButton (View view) {
+    public void ImgButton(View view) {
         Button btn = (Button) view;
         if (btn.getTag().toString().equalsIgnoreCase("back")) {
             finish();

@@ -8,7 +8,8 @@ public class Products implements Serializable {
     private String userID, productName, price, productID;
     private int active;
 
-    public Products() { }
+    public Products() {
+    }
 
     public Products(String userID, String productName, String price, String productID) {
         this.userID = userID;
@@ -38,7 +39,7 @@ public class Products implements Serializable {
         return userID;
     }
 
-    public void setUserID (String userID){
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

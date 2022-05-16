@@ -29,8 +29,7 @@ import java.security.NoSuchAlgorithmException;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
-    String input_email;
-    String input_password;
+    String input_email, input_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
