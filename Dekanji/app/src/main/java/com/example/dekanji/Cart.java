@@ -145,6 +145,9 @@ public class Cart extends AppCompatActivity implements MyAdapterSD.OnNoteListene
             referenceOrders.child(orderID).setValue(order);
 
             Toast.makeText(this, "Your order has been recorded", Toast.LENGTH_SHORT).show();
+
+            finish();
+            startActivity(new Intent(Cart.this, StoreDisplay.class));
         }
     }
 

@@ -58,6 +58,13 @@ public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteL
 
          btn_orderItems_done = findViewById(R.id.btn_orderItems_done);
 
+         if (getIntent().getStringExtra("source")  != null) {
+             btn_orderItems_done.setVisibility(View.GONE);
+         }
+         else {
+             btn_orderItems_done.setVisibility(View.VISIBLE);
+         }
+
 
         //set the text of text views
         buyer_name.setText(order.getName());
