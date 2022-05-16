@@ -128,6 +128,7 @@ public class UserProfile extends AppCompatActivity {
 
         if (btn.getTag().toString().equalsIgnoreCase("logout")){
             FirebaseAuth.getInstance().signOut();
+            finish();
             startActivity(new Intent(UserProfile.this, MainActivity.class));
         }
     }
