@@ -30,6 +30,8 @@ public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteL
 
     DatabaseReference referenceOrders;
 
+    Button btn_orderItems_done;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,8 @@ public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteL
          phoneNumber = findViewById(R.id.tv_buyer_phonenumber_orders);
          total = findViewById(R.id.tv_buyer_total_orders);
 
+         btn_orderItems_done = findViewById(R.id.btn_orderItems_done);
+
 
         //set the text of text views
         buyer_name.setText(order.getName());
@@ -71,6 +75,7 @@ public class OrderItems extends AppCompatActivity implements MyAdapterSD.OnNoteL
         if (imgview.getTag().toString().equalsIgnoreCase("back")) {
             finish();
             startActivity(new Intent(this, Orders.class));
+
         }
     }
 

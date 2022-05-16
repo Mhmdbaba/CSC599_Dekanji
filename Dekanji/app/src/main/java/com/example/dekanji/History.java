@@ -70,7 +70,13 @@ public class History extends AppCompatActivity implements MyAdapterO.OnNoteListe
 
     @Override
     public void onNoteClick(int position) {
+        Order ord = cart.get(position);
 
+        Intent intent = new Intent(History.this, OrderItems.class);
+        intent.putExtra("order",  ord);
+        intent.putExtra("source","history");
+        finish();
+        startActivity(intent);
     }
 
     public void ImgButton (View view) {
